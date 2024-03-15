@@ -21,7 +21,7 @@ public class VariableMain01 {
         // 논리 타입: boolean
         long number = 12_345_678_900L;
         double pi = 3.141592;
-        boolean isMarried = false;
+        boolean isMarried = false; // true
         
         // 변수 이름 작성 규칙:
         // - 변수 이름은 알파벳, 숫자, _, $만 사용 가능.
