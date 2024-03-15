@@ -19,6 +19,12 @@ public class VariableMain04 {
         char ch3 = (char) (ch1 - 1);
         System.out.println(ch3);
 
+        // 1. 변수는 같은 타입의 값만 저장할 수 있음.
+        // 2. 큰 범위의 타입에는 작은 범위 타입의 값을 저장할 수 있음.
+        // 3. 작은 범위의 타입에 큰 범위 값을 저장하려고 하면 에러가 발생.
+        // 4. 정수 리터럴(literal, 상수)은 범위를 넘지 않으면 byte, short, char에 저장 가능.
+        // 강제 타입 변환(casting): 변수의 타입을 강제로 바꿈.
+        
     }
 
 }
