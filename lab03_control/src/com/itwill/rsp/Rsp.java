@@ -18,7 +18,7 @@ public class Rsp {
         System.out.print("선택>>> ");
         
         // TODO: 사용자가 콘솔창에서 입력한 정수를 변수(user)에 저장.
-        // TODO: 1 이상 4 미만의 정수 난수 1개를 변수(computer)에 저장.
+        // TODO: 0 이상 3 미만의 정수 난수 1개를 변수(computer)에 저장.
         // TODO: 가위바위보 게임 결과(User win/Computer win/Tie)를 출력.
         
     }
