@@ -42,6 +42,12 @@ public class LoopMain08 {
         
         System.out.println("----- [4] -----");
         // while문을 사용해서 구구단 9단을 출력.
+        n = 1;
+        while (n < 10) {
+            System.out.printf("9 x %d = %d\n", n, 9 * n);
+            n++;
+        }
+        // for (int i = 1; i < 10; i++) { print(); }
 
     }
 
