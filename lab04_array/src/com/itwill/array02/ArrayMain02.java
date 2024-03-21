@@ -19,7 +19,31 @@ public class ArrayMain02 {
         for (int x : numbers) {
             System.out.println(x);
         }
+        
+        // boolean 타입 5개를 저장하는 배열을 선언하고, 기본값(false)로 초기화.
+        boolean[] bools = new boolean[5];
+        for (int i = 0; i < bools.length; i++) {
+            System.out.print(bools[i] + " ");
+        }
+        System.out.println();
+        
+        bools[0] = true; // 배열 bools의 인덱스 0 위치의 원소를 true로 변경.
+        bools[4] = true;
+        for (boolean x : bools) {
+            System.out.print(x + " ");
+        }
+        System.out.println();
 
+        // 문자열(String) 3개를 저장할 수 있는 배열을 선언, 기본값(null)으로 초기화.
+        String[] names = new String[3];
+        names[0] = "홍길동";
+        names[2] = "오쌤";
+        
+        for (String s : names) {
+            System.out.print(s + " ");
+        }
+        System.out.println();
+        
     }
 
 }
