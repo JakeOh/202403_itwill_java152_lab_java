@@ -22,6 +22,8 @@ public class ArrayMain01 {
         
         // 배열 선언 & 초기화 방법 1:
         // 타입[] 변수이름 = new 타입[원소 개수];
+        // -> 배열의 모든 원소를 그 타입의 기본값으로 초기화를 해줌.
+        // -> 정수 타입 기본값(0), 실수 타입 기본값(0.0), boolean 타입의 기본값(false), 그 이외의 타입들의 기본값(null)
         int[] scores = new int[3]; // int 타입 3개를 저장할 수 있는 배열. 모든 값은 0으로 초기화.
         System.out.println(scores);
         System.out.println(scores[0]); // 배열 scores의 인덱스 0 위치의 원소를 출력
