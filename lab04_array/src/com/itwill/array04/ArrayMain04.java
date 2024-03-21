@@ -3,6 +3,7 @@ package com.itwill.array04;
 public class ArrayMain04 {
 
     public static void main(String[] args) {
+        // 숫자 배열에 대응하는 문자열 배열 만들기:
         // 정수 10개를 저장할 수 있는 배열(codes)을 만들고 기본값으로 초기화.
         // 배열 codes에 1 이상 4 이하 범위 정수를 임의로 저장.
         // codes 내용을 출력.

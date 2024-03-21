@@ -12,11 +12,11 @@ public class ArrayMain03 {
         Random random = new Random();
         
         // int 타입 5개를 저장할 수 있는 배열(scores)을 선언 & 기본값으로 초기화
-        int[] scores = new int[10];
+        int[] scores = new int[5];
         
-        // for 문을 사용해서 5개의 정수 난수(0 ~ 100)를 배열에 저장.
+        // for 문을 사용해서 5개의 정수 난수(0 ~ 10)를 배열에 저장.
         for (int i = 0; i < scores.length; i++) {
-            scores[i] = random.nextInt(101);
+            scores[i] = random.nextInt(11);
         }
         
         // 향상된 for 문을 사용해서 배열에 저장된 모든 점수들을 출력.
