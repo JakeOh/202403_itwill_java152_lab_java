@@ -33,7 +33,7 @@ public class LoopMain14 {
                 System.out.println("잔고: " + balance);
                 break;
             case 4:
-                run = false;
+                run = false; // while 문을 종료하기 위한 조건 변경.
                 System.out.println("안녕히 가세요~");
                 break; // switch 문장을 종료.
             default:
