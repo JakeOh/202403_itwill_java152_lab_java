@@ -18,6 +18,8 @@ public class MethodMain02 {
         double result = add(1.0, 2.0); // add 메서드 호출
         System.out.println("result = " + result);
         
+        // TODO: subtract, multiply, divide 메서드를 호출하고, 그 결과를 출력.
+        
     } // end main
 
     /**
@@ -29,5 +31,32 @@ public class MethodMain02 {
     public static double add(double x, double y) {
         return x + y; // return 문: 메서드를 호출한 곳으로 값을 반환하는 문장.
     }
+    
+    /**
+     * subtract.
+     * 숫자 2개를 전달받아서, 두 숫자의 뺄셈 결과를 반환.
+     * @param x 실수(double).
+     * @param y 실수(double).
+     * @return x + y를 반환.
+     */
+    public static double subtract(double x, double y) {
+        // TODO
+    }
+    
+    /**
+     * multiply.
+     * 숫자 2개를 전달받아서, 두 숫자의 곱셈 결과를 반환.
+     * @param x 실수(double).
+     * @param y 실수(double).
+     * @return x + y를 반환.
+     */
+    
+    /**
+     * divide.
+     * 숫자 2개를 전달 받아서 첫번째 아규먼트를 두번째 아규먼트로 나눈 결과를 반환.
+     * @param x 나뉨수.
+     * @param y 나누는 수. 0이 아니어야 함.
+     * @return x + y를 반환.
+     */
     
 } // end class
