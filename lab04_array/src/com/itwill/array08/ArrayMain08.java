@@ -19,7 +19,26 @@ public class ArrayMain08 {
             }
             System.out.println();
         }
-
+        
+        System.out.println("--------------");
+        
+        // (2) 2차원 배열의 행의 개수는 결정되어져 있고, 열의 개수가 결정되지 않은 경우:
+        // 2차원 배열이 가지고 있는 1차원 배열의 개수는 알고 있지만,
+        // 각각의 1차원 배열들의 원소 개수는 아직 결정되지 않은 경우:
+        int[][] array2 = new int[3][]; // 1차원 배열 3개를 원소로 갖는 2차원 배열.
+        
+        // 열의 개수가 미정인 2차원 배열은 사용하기 전에 반드시 1차원 배열들을 각각 생성해야만 함.
+        array2[0] = new int[2]; // 원소 2개를 갖는 1차원 배열.
+        array2[1] = new int[4]; // 원소 4개를 갖는 1차원 배열.
+        array2[2] = new int[3]; // 원소 3개를 갖는 1차원 배열.
+        
+        for (int[] arr : array2) {
+            for (int x : arr) {
+                System.out.print(x + " ");
+            }
+            System.out.println();
+        }
+        
     }
 
 }
