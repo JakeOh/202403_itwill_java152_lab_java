@@ -21,12 +21,12 @@ public class MethodMain04 {
         int y = random.nextInt(100);
         System.out.println("x=" + x + ", y=" + y);
         
-        int big = whoIsBig(x, y);
+        int big = whoIsBig(x, y); // x, y 중 크거나 같은 수를 리턴.
         System.out.println("big=" + big);
         
         // Ex3.
         int code = random.nextInt(1, 5);
-        String gender = parseGenderCode(code);
+        String gender = parseGenderCode(code); // 1 또는 3이면 "male", 2 또는 4이면 "female"
         System.out.println("code=" + code + ", gender=" + gender);
 
     }
