@@ -32,6 +32,47 @@ public class MethodMain04 {
     }
     
     /**
+     * 성별 코드(정수)를 문자열로 변환해서 리턴. 
+     * @param code 성별 코드. 1, 2, 3, 4.
+     * @return 코드 값이 1 또는 3이면 "male", 코드 값이 2 또는 4이면 "female".
+     * 만약 그 이외의 코드 값인 경우에는 "unknown"을 리턴.
+     */
+    public static String parseGenderCode(int code) {
+        String result = ""; // 반환값을 저장하기 위한 변수
+        
+        switch (code) {
+        case 1:
+        case 3:
+            result = "male";
+            break;
+        case 2:
+        case 4:
+            result = "female";
+            break;
+        default:
+            result = "unknown";
+        }
+        
+        return result;
+    }
+    
+    /**
+     * 두 수 x와 y 중에서 크거나 같은 수를 리턴.
+     * @param x 정수(int). 크기를 비교할 정수.
+     * @param y 정수(int). 크기를 비교할 정수.
+     * @return x > y 이면 x, 그렇지 않으면 y.
+     */
+    public static int whoIsBig(int x, int y) {
+//        return (x > y) ? x : y;
+        
+        if (x > y) {
+            return x;
+        } else {
+            return y;
+        }
+    }
+    
+    /**
      * 아규먼트로 전달된 정수가 짝수인 지, 홀수인 지를 리턴하는 메서드.
      * @param x 정수(int). 짝수/홀수를 검사할 정수.
      * @return x가 짝수이면 true, 그렇지 않으면 false.
