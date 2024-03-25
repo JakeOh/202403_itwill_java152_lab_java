@@ -26,7 +26,7 @@ public class MethodMain04 {
         
         // Ex3.
         int code = random.nextInt(1, 5);
-        String gender = parseGenderCode(code); // 1 또는 3이면 "male", 2 또는 4이면 "female"
+        String gender = parseGenderCode(code); // 1 또는 3이면 "male", 2 또는 4이면 "female", 그 이외에는 "unknown"
         System.out.println("code=" + code + ", gender=" + gender);
 
     }
