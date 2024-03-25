@@ -22,8 +22,10 @@ public class MethodMain02 {
         result = subtract(1, 2);
         System.out.println("result = " + result);
         
-        System.out.println("multiply = " + multiply(1.0, 2.0));
-        System.out.println("divide = " + divide(1, 2));
+        double x = 1.0;
+        double y = 2.0;
+        System.out.println("multiply = " + multiply(x, y));
+        System.out.println("divide = " + divide(x, y));
         
     } // end main
 
