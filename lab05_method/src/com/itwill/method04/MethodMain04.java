@@ -15,6 +15,19 @@ public class MethodMain04 {
         // Ex1. isEven(정수): 정수가 짝수이면 true, 그렇지 않으면 false를 리턴.
         boolean result = isEven(number);
         System.out.println("isEven = " + result);
+        
+        // Ex2.
+        int x = random.nextInt(100);
+        int y = random.nextInt(100);
+        System.out.println("x=" + x + ", y=" + y);
+        
+        int big = whoIsBig(x, y);
+        System.out.println("big=" + big);
+        
+        // Ex3.
+        int code = random.nextInt(1, 5);
+        String gender = parseGenderCode(code);
+        System.out.println("code=" + code + ", gender=" + gender);
 
     }
     
