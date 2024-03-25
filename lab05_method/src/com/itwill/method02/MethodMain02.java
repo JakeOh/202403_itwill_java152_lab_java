@@ -18,7 +18,12 @@ public class MethodMain02 {
         double result = add(1.0, 2.0); // add 메서드 호출
         System.out.println("result = " + result);
         
-        // TODO: subtract, multiply, divide 메서드를 호출하고, 그 결과를 출력.
+        // subtract, multiply, divide 메서드를 호출하고, 그 결과를 출력.
+        result = subtract(1, 2);
+        System.out.println("result = " + result);
+        
+        System.out.println("multiply = " + multiply(1.0, 2.0));
+        System.out.println("divide = " + divide(1, 2));
         
     } // end main
 
@@ -40,7 +45,7 @@ public class MethodMain02 {
      * @return x - y를 반환.
      */
     public static double subtract(double x, double y) {
-        // TODO
+        return x - y;
     }
     
     /**
@@ -50,6 +55,9 @@ public class MethodMain02 {
      * @param y 실수(double).
      * @return x * y를 반환.
      */
+    public static double multiply(double x, double y) {
+        return x * y;
+    }
     
     /**
      * divide.
@@ -58,5 +66,8 @@ public class MethodMain02 {
      * @param y 나누는 수. 0이 아니어야 함.
      * @return x / y를 반환.
      */
+    public static double divide(double x, double y) {
+        return x / y;
+    }
     
 } // end class
