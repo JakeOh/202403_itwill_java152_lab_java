@@ -23,12 +23,17 @@ public class Student {
         System.out.println("----- 학생 정보 -----");
         System.out.println("번호: " + id);
         System.out.println("이름: " + name);
-        System.out.println("국어: " + subject.korean); // this.subject.korean
-        System.out.println("영어: " + subject.english);
-        System.out.println("수학: " + subject.math);
-        System.out.println("과학: " + subject.science);
-        System.out.println("총점: " + subject.getTotal());
-        System.out.println("평균: " + subject.getMean());
+        if (subject != null) {
+            subject.info();
+    //        System.out.println("국어: " + subject.korean); // this.subject.korean
+    //        System.out.println("영어: " + subject.english);
+    //        System.out.println("수학: " + subject.math);
+    //        System.out.println("과학: " + subject.science);
+    //        System.out.println("총점: " + subject.getTotal());
+    //        System.out.println("평균: " + subject.getMean());
+        } else {
+            System.out.println("Subject: null");
+        }
         System.out.println("---------------------");
     }
     

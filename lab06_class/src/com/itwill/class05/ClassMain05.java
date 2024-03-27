@@ -23,6 +23,10 @@ public class ClassMain05 {
         Student student1 = new Student(1, "홍길동", subject2);
         student1.info();
         
+        // 기본 생성자를 사용해서 Student 타입의 객체를 생성
+        Student student2 = new Student();
+        student2.info();
+        
     }
     
 }
