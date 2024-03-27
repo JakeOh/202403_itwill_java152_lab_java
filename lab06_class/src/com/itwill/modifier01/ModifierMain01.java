@@ -14,8 +14,14 @@ package com.itwill.modifier01;
 public class ModifierMain01 {
     
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        
+        // AccessExample 타입 객체 생성
+        AccessExample ex = new AccessExample(1, 2, 3, 4);
+//        System.out.println("a = " + ex.a); //-> 컴파일 에러: not visible(보이지 않음).
+//        ex.a = 100;
+        System.out.println("b = " + ex.b);
+        ex.b = 200;
+        System.out.println("b = " + ex.b);
+        ex.info();
     }
 
 }
