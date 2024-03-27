@@ -27,6 +27,10 @@ public class ClassMain05 {
         Student student2 = new Student();
         student2.info();
         
+        // Student 생성자 (3)을 사용해서 객체 생성
+        Student student3 = new Student(10, "오쌤", 10, 20, 30, 25);
+        student3.info();
+        
     }
     
 }

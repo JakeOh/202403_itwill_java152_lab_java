@@ -17,6 +17,13 @@ public class Student {
         this.name = name;
         this.subject = subject;
     }
+    
+    // 생성자 (3)
+    public Student(int id, String name, int korean, int english, int math, int science) {
+        this.id = id;
+        this.name = name;
+        this.subject = new Subject(korean, english, math, science);
+    }
 
     // 메서드: 학생의 정보(번호, 이름, 각 과목의 점수, 총점, 평균)를 출력.
     public void info() {
