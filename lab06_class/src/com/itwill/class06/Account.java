@@ -30,6 +30,7 @@ public class Account {
      * 이체할 계좌 to의 잔고에서는 이체금액 amount를 더함.
      * @param to 이체할 계좌(Account 타입).
      * @param amount 이체할 금액.
+     * @return true.
      */
     
     /**
