@@ -26,12 +26,57 @@ public class ContactMain {
             case 1:
                 app.saveNewContact();
                 break;
+            case 2:
+                app.readAllContacts();
+                break;
+            case 3:
+                app.readContactByIndex();
+                break;
+            case 4:
+                app.updateContactByIndex();
+                break;
             default:
                 System.out.println("메뉴 번호(0 ~ 4)를 확인하세요.");
             }
         }
         
         System.out.println("*** 프로그램 종료 ***");
+    }
+    
+    private void updateContactByIndex() {
+        System.out.println("\n--- 연락처 수정 ---");
+        
+        System.out.print("인덱스 입력>> ");
+        int index = Integer.parseInt(scanner.nextLine());
+        
+        System.out.println("수정전: " + contacts[index].toString());
+        
+        System.out.print("이름 수정>> ");
+        String name = scanner.nextLine();
+        
+        System.out.print("전화번호 수정>> ");
+        String phone = scanner.nextLine();
+        
+        System.out.print("이메일 수정>> ");
+        String email = scanner.nextLine();
+        
+        // TODO: 입력한 내용으로 배열의 내용을 업데이트.
+    }
+
+    private void readContactByIndex() {
+        System.out.println("\n--- 인덱스 검색 ---");
+        System.out.print("인덱스 입력>> ");
+        int index = Integer.parseInt(scanner.nextLine());
+        
+        // 해당 인덱스의 연락처를 출력
+        System.out.println(contacts[index].toString());
+    }
+    
+    private void readAllContacts() {
+        System.out.println("\n--- 연락처 목록 ---");
+        for (int i = 0; i < count; i++) {
+            System.out.println(contacts[i].toString());
+        }
     }
     
     private void saveNewContact() {
