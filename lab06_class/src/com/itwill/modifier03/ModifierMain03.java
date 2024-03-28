@@ -20,6 +20,12 @@ public class ModifierMain03 {
         member.setMemberPassword(null);
         System.out.println("변경후 PW: " + member.getMemberPassword());
 
+        Person p = new Person("오쌤", 16);
+        System.out.println("name: " + p.getName());
+        System.out.println("age: " + p.getAge());
+        p.setAge(17);
+        System.out.println("age: " + p.getAge());
+        
     }
 
 }
