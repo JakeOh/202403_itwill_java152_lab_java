@@ -54,6 +54,17 @@ public class ModifierMain06 {
         ModifierMain06 app = new ModifierMain06("버스 파업");
 //        app.message = ""; //-> final 필드는 객체 생성 이후에 값을 변경할 수 없음.
         
+        // Test 클래스의 정적(static) 멤버 사용:
+        System.out.println("Test.y = " + Test.y);
+        Test.y = 100; // static 필드는 객체 생성과 관계없이 사용할 수 있음.
+        System.out.println("Test.y = " + Test.y);
+        Test.printFields2();
+        
+        // Test 클래스의 인스턴스(static이 아닌) 멤버 사용: 먼저 객체를 생성해야 됨.
+        Test test = new Test();
+        System.out.println("test.x = " + test.x);
+        test.x = 100;
+        test.printFields();
     }
 
 }
