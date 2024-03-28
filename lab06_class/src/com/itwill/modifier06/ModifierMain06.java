@@ -15,7 +15,7 @@ package com.itwill.modifier06;
 
 public class ModifierMain06 {
     
-    private static final int version = 1;
+    private static final int version = 1; // 선언과 동시에 초기화된 final 필드
     
     private final String message; // 선언할 때 초기화되지 않은 final 필드
     
