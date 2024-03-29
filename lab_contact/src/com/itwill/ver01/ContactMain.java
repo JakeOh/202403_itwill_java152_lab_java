@@ -60,7 +60,11 @@ public class ContactMain {
         System.out.print("이메일 수정>> ");
         String email = scanner.nextLine();
         
-        // TODO: 입력한 내용으로 배열의 내용을 업데이트.
+        // 입력한 내용으로 배열의 내용을 업데이트.
+//        contacts[index].setName(name);
+//        contacts[index].setPhone(phone);
+//        contacts[index].setEmail(email);
+        contacts[index] = new Contact(name, phone, email);
     }
 
     private void readContactByIndex() {
