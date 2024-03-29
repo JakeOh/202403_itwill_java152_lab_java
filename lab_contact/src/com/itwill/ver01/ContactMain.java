@@ -48,6 +48,10 @@ public class ContactMain {
         
         System.out.print("인덱스 입력>> ");
         int index = Integer.parseInt(scanner.nextLine());
+        if (index < 0 || index >= count) {
+            System.out.println("해당 인덱스에는 수정할 정보가 없습니다...");
+            return;
+        }
         
         System.out.println("수정전: " + contacts[index].toString());
         
@@ -65,6 +69,8 @@ public class ContactMain {
 //        contacts[index].setPhone(phone);
 //        contacts[index].setEmail(email);
         contacts[index] = new Contact(name, phone, email);
+        
+        System.out.println("연락처 수정 성공!");
     }
 
     private void readContactByIndex() {
@@ -73,18 +79,29 @@ public class ContactMain {
         int index = Integer.parseInt(scanner.nextLine());
         
         // 해당 인덱스의 연락처를 출력
-        System.out.println(contacts[index].toString());
+        if (index >= 0 && index < count) {
+            System.out.println(contacts[index].toString());
+        } else {
+            System.out.println("해당 인덱스에는 연락처 없습니다...");
+        }
     }
     
     private void readAllContacts() {
         System.out.println("\n--- 연락처 목록 ---");
+        // 인덱스 0번부터 현재 저장된 연락처 개수보다 작을 때까지
         for (int i = 0; i < count; i++) {
-            System.out.println(contacts[i].toString());
+            System.out.println(i + " : " + contacts[i].toString());
         }
     }
     
     private void saveNewContact() {
         System.out.println("\n--- 새 연락처 저장 ---");
+        
+        // 배열에 저장된 연락처 개수(count)가 배열 최대 길이와 같다면 저장 기능을 종료.
+        if (count == MAX_LENGTH) {
+            System.out.println("저장 공간이 부족합니다...");
+            return; // 메서드 종료
+        }
         
         System.out.print("이름 입력>> ");
         String name = scanner.nextLine();
@@ -101,6 +118,8 @@ public class ContactMain {
         contacts[count] = contact;
         // 배열에 저장 후에는 연락처 저장 개수(인덱스)를 증가
         count++;
+        
+        System.out.println("연락처 저장 성공!");
     }
     
     private int showMainMenu() {
