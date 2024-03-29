@@ -23,6 +23,7 @@ public class TestMain {
         }
         
         Season2 season2 = Season2.SPRING;
+        System.out.println(season2);
         if (season2 == Season2.SPRING) {
             System.out.println("봄");
         } else if (season2 == Season2.SUMMER) {
@@ -31,6 +32,10 @@ public class TestMain {
             System.out.println("...");
         }
 
+        Season3 season3 = Season3.SPRING;
+        System.out.println(season3);
+        System.out.println(season3.getName());
+        
     }
 
 }
