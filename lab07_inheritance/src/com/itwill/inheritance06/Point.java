@@ -18,5 +18,22 @@ public class Point {
     public String toString() {
         return "Point(x=" + x + ", y=" + y + ")";
     }
+    
+    @Override // Object에서 상속받은 equals를 재정의
+    public boolean equals(Object obj) {
+        boolean result = false;
+        
+        if (obj instanceof Point) {
+            Point pt = (Point) obj;
+            result = (this.x == pt.x) && (this.y == pt.y);
+        }
+        
+        return result;
+    }
+    
+    @Override // Object 클래스의 hashCode() 메서드를 재정의
+    public int hashCode() {
+        return x + y;
+    }
 
 }
