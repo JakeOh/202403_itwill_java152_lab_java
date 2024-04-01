@@ -1,7 +1,5 @@
 package com.itwill.inheritance04;
 
-import com.itwill.inheritance02.InheritanceMain02;
-
 /*
  * final: 변경할 수 없는.
  * final 지역 변수: 값을 초기화한 이후에 그 값을 변경할 수 없는(재할당할 수 없는) 지역 변수.
