@@ -7,8 +7,18 @@ import java.util.Scanner;
  * java.lang.Object 클래스: 자바의 최상위 클래스.
  * 자바의 모든 클래스는 Object 클래스를 확장(상속).
  * Object 클래스에서 public으로 공개된 메서드들은 모든 하위 타입에서 사용할 수 있음.
- * Ojbect 클래스의 모든 메서드는 하위 클래스에서 재정의(override)할 수 있음.
- * (예) toString(), equals(), hashCode(), getClass(), ...
+ * Object 클래스의 모든 메서드는 하위 클래스에서 재정의(override)할 수 있음.
+ * (예) toString(), equals(), hashCode(), ...
+ * - toString(): 객체의 문자열 표현식을 리턴.
+ *   "패키지.클래스@주소" 형식의 문자열을 만들어서 리턴.
+ * - equals(): 객체 동등 비교 메서드.
+ *   힙(heap)에 생성된 객체가 같으면(객체의 주소가 같으면) true, 다르면 false를 리턴.
+ * - hashCode(): 객체의 해시코드(정수) 값을 리턴.
+ *   o. 객체의 주소값으로 해시코드를 만듦.
+ *   o. 해시코드가 만족해야 하는 조건:
+ *      1. 같은 객체에서 hashCode() 여러번 호출하더라도 항상 같은 정수가 리턴되어야 함.
+ *      2. equal() 메서드의 결과가 true가 되는 두 객체의 해시코드 값은 같아야 함.
+ *      3. 해시코드 값이 같은 두 객체에서 equals() 메서드의 결과가 항상 true가 될 필요는 없음.
  */
 
 class T {
