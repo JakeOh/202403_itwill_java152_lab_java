@@ -15,6 +15,12 @@ import com.itwill.inheritance02.InheritanceMain02;
 
 //class MyString extends String {} //-> final 클래스를 상속하는 새로운 클래스는 선언할 수 없음.
 
+class C {}
+class E extends C {}
+
+final class D {}
+//class F extends D {};
+
 class A {
     public void test1() {
         System.out.println("test1");
