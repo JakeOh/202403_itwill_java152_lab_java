@@ -16,6 +16,14 @@ public class BusinessPerson extends Person {
      * 상위클래스의 아규먼트를 갖는 생성자는 자동으로 호출되지 않음.
      * 상위클래스의 아규먼트를 갖는 생성자를 호출하려면 반드시 super(...);를 호출해야만 함.
      * 생성자 코드 안에서 super(...) 호출은 가장 먼저 작성되어야 함.
+     * 
+     * this의 의미:
+     * (1) 생성된 객체(인스턴스)의 참조값: this.field, this.method(...)
+     * (2) 오버로딩(overloading)된 생성자: this(), this(...)
+     * 
+     * super의 의미:
+     * (1) 생성된 상위 타입 객체의 참조값: super.field, super.method(...)
+     * (2) 상위클래스의 생성자: super(), super(...)
      */
     
     public BusinessPerson() {
