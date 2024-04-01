@@ -34,10 +34,11 @@ public class InheritanceMain03 {
         for (Car c : cars) {
             test(c);
         }
+        
     }
     
     public static void test(Car car) {
-        // instanceof 연산자: 객체가 어떤 타입인 지를 반환하는 연산자
+        // instanceof 연산자: 객체가 어떤 타입인 지를 검사하는 연산자
         // 변수 instanceof Type(Class): 변수가 클래스 타입이면 true, 그렇지 않으면 false.
         if (car instanceof HybridCar) {
             System.out.println("하이브리드 자동차 검사...");
