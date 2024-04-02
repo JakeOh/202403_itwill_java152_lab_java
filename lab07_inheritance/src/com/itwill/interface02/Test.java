@@ -12,11 +12,41 @@ package com.itwill.interface02;
  * 5. private static 메서드 - Java 9 버전부터
  *    -> body가 구현된 메서드.
  *    -> static 또는 default 메서드에서만 호출할 목적으로 만드는 메서드.
- * 6. private default 메서드 - Java 9 버전부터
+ * 6. private 메서드 - Java 9 버전부터
  *    -> body가 구현된 메서드.
  *    -> default 메서드에서만 호출할 목적으로 만드는 메서드.
  */
 
 public interface Test {
-
+    // 1. [public static final] 필드
+    int VERSION = 1;
+    
+    // 2. [public abstract] 메서드
+    void test();
+    
+    // 3. [public] static 메서드
+    static void staticMethod() {
+        System.out.println("공개 정적(public static) 메서드");
+        privateStaticMethod();
+        System.out.println("--------------------------------");
+    }
+    
+    // 4. [public] default 메서드
+    default void defaultMethod() {
+        System.out.println("공개 기본(public default) 메서드");
+        privateStaticMethod();
+        privateMethod();
+        System.out.println("--------------------------------");
+    }
+    
+    // 5. private static 메서드
+    private static void privateStaticMethod() {
+        System.out.println("비공개 정적 메서드 호출");
+    }
+    
+    // 6. private 메서드
+    private void privateMethod() {
+        System.out.println("비공개 구현된 메서드");
+    }
+    
 }
