@@ -18,7 +18,7 @@ public class User {
     // toString 재정의 - id와 password를 출력.
     @Override
     public String toString() {
-        return "User(id=" + id + ", password=" + password + ")";
+        return "User [id=" + id + ", password=" + password + "]";
     }
 
     // hashCode 재정의 - id가 같은 User 객체는 같은 정수값이 리턴되도록.
