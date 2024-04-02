@@ -34,6 +34,7 @@ public class Point {
     @Override // Object 클래스의 hashCode() 메서드를 재정의
     public int hashCode() {
         return x + y;
+        // x * y; 10 * x + y;
     }
 
 }
