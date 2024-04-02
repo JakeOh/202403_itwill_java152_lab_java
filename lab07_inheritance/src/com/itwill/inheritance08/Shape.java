@@ -15,7 +15,7 @@ public abstract class Shape {
     
     // final 메서드: 하위클래스에서 재정의(override)를 할 수 없는 메서드.
     public final void draw() {
-        String info = String.format("%s[넓이=%f, 둘레=%f]\n",
+        String info = String.format("%s[넓이=%f, 둘레=%f]",
                 type, area(), perimeter());
         System.out.println(info);
     }
