@@ -38,6 +38,10 @@ public class InheritanceMain06 {
         System.out.println("user1.equals(user2): " + user1.equals(user2));
         System.out.println("user1.equals(user3): " + user1.equals(user3));
         System.out.println("user3.equals(user1): " + user3.equals(user1));
+        
+        System.out.println("user1 hash: " + user1.hashCode());
+        System.out.println("user2 hash: " + user2.hashCode());
+        System.out.println("user3 hash: " + user3.hashCode());
     }
 
 }
