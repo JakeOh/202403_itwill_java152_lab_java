@@ -29,7 +29,7 @@ public class InterfaceMain01 {
         
         // MySqlDatabase 객체를 생성하고, 메서드들을 이용.
 //        MySqlDatabase db = new MySqlDatabase();
-        Database db = new MySqlDatabase();
+        Database db = new MySqlDatabase(); // 다형성을 사용한 변수 선언.
         
         int result = db.insert();
         System.out.println("insert result = " + result);
