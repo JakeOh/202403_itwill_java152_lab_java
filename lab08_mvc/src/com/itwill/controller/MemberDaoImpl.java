@@ -35,7 +35,7 @@ public class MemberDaoImpl implements MemberDao {
 
     @Override
     public Member[] read() {
-        
+        // TODO 배열 members의 원소들 중 null이 아닌 원소들로만 이루어진 배열을 리턴.
         return members;
     }
 
