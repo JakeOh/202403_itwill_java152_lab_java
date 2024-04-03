@@ -5,6 +5,8 @@ import com.itwill.model.Member;
 // MVC 아키텍쳐에서 컨트롤러 역할을 담당할 인터페이스.
 // DAO(Data Access Object)
 public interface MemberDao {
+    
+    int MAX_LENGTH = 3; // 배열의 최대 길이
 
     /**
      * 새로운 회원 정보를 배열에 저장.
