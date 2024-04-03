@@ -15,6 +15,15 @@ public class SingletonMain {
         System.out.println(captain.getName());
         System.out.println(captain2.getName());
 
+        Singleton s1 = Singleton.INSTANCE;
+        System.out.println(s1); // enum 타입은 toString() 메서드를 override
+        System.out.println(s1.getName());
+        s1.setName("블랙위도우");
+        System.out.println(s1.getName());
+        
+        Singleton s2 = Singleton.INSTANCE;
+        System.out.println(s2.getName());
+        
     }
 
 }
