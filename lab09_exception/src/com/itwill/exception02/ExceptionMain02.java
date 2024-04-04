@@ -37,6 +37,8 @@ public class ExceptionMain02 {
             System.out.println("x / y = " + (x / y));
         } catch (ArithmeticException e) {
             System.out.println("y는 0이 될 수 없음.");
+        } catch (NumberFormatException e) {
+            System.out.println("x, y는 정수로 입력하세요.");
         }
 
     }
