@@ -50,6 +50,10 @@ public class MemberMain {
         
         System.out.print("업데이트할 인덱스>> ");
         int index = Integer.parseInt(scanner.nextLine());
+        if (!((MemberDaoImpl) dao).isValidIndex(index)) {
+            System.out.println("업데이트할 회원 정보가 없습니다.");
+            return;
+        }
         
         Member member = dao.read(index);
         System.out.println("수정 전: " + member);
@@ -85,13 +89,21 @@ public class MemberMain {
     private void readAllMembers() {
         System.out.println("\n--- 회원 목록 ---");
         Member[] members = dao.read(); // View에서 Controller 기능을 사용, 출력할 데이터를 가져옴.
+        int index = 0;
         for (Member m : members) {
-            System.out.println(m);
+            System.out.println("[" + index + "] " + m);
+            index++;
         }
     }
 
     private void saveNewMember() {
         System.out.println("\n----- 새 회원 정보 저장 ----");
+        
+        MemberDaoImpl daoImpl = (MemberDaoImpl) dao;
+        if (daoImpl.isMemoryFull()) {
+            System.out.println("회원 정보를 저장할 메모리가 부족합니다.");
+            return;
+        }
         
         System.out.print("아이디 입력>> ");
         String id = scanner.nextLine();
