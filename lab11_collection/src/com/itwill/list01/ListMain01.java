@@ -69,7 +69,6 @@ public class ListMain01 {
         
         numbers.remove(Integer.valueOf(-100)); // remove(Object x): 같은 값의 원소를 지움.
         System.out.println(numbers);
-        
 
     }
 
