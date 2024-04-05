@@ -57,8 +57,11 @@ public class ContactDaoImpl implements ContactDao {
 
     @Override
     public int update(int index, Contact contact) {
-        if (isValidIndex(index)) {
-            contacts[index] = contact;
+        if (isValidIndex(index) && contact != null) {
+//            contacts[index] = contact;
+            contacts[index].setName(contact.getName());
+            contacts[index].setPhone(contact.getPhone());
+            contacts[index].setEmail(contact.getEmail());
             return 1;
         } else {
             return 0;
