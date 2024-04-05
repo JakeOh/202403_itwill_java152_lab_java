@@ -36,6 +36,11 @@ public class DateTimeEx {
         // LocalDateTime --> Timestamp 변환
         Timestamp ts = Timestamp.valueOf(now);
         System.out.println(ts);
+        System.out.println(ts.getTime());
+        
+        // Timestamp --> LocalDateTime 변환
+        LocalDateTime dt = ts.toLocalDateTime();
+        System.out.println(dt);
         
     }
 
