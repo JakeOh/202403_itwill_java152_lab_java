@@ -48,7 +48,7 @@ public class StringEx {
         // 결과: TEST test TeSt tEsT
         String[] tests = {"TEST", "test", "TeSt", "tEsT", "테스트"};
         for (String s : tests) {
-            if (s.toLowerCase().contains("est")) {
+            if (s.toLowerCase().contains("est")) { // s.toUpperCase().contains("EST")
                 System.out.print(s + " ");
             }
         }
