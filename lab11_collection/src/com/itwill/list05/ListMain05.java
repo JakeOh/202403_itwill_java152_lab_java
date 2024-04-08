@@ -13,6 +13,7 @@ public class ListMain05 {
         members.add(new Member("guest", "guest"));
         members.add(new Member("itwill", "0410"));
         members.add(new Member("TEST", "test"));
+        members.add(new Member("guest", "0000"));
         
 //        System.out.println(members);
         // 향상된 for 문장을 사용해서 members의 원소들을 출력.
@@ -29,6 +30,17 @@ public class ListMain05 {
             }
         }
         System.out.println(list);
+        
+        // members에서 첫번째로 등장하는 id가 "guest"인 회원 삭제
+//        members.remove(new Member("guest", null));
+        for (int i = 0; i < members.size(); i++) {
+            if (members.get(i).getId().equals("guest")) {
+                members.remove(i);
+                break;
+            }
+        }
+        
+        System.out.println(members);
 
     }
 
