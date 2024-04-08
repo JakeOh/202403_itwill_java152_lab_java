@@ -1,6 +1,7 @@
 package com.itwill.map01;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /*
  * Collection<E>
@@ -34,6 +35,37 @@ public class MapMain01 {
         
         System.out.println(map);
         
+        // map에 저장된 값(value)를 찾는 메서드: get(key)
+        String value = map.get(1); //-> key가 존재하면 value를 리턴.
+        System.out.println(value);
+        
+        value = map.get(100); //-> key가 없으면 null을 리턴.
+        System.out.println(value);
+        
+        // getOrDefault(key, defaultValue):
+        value = map.getOrDefault(10, "무명씨"); //-> key가 존재하면, key에 매핑된 value를 리턴.
+        System.out.println(value);
+        
+        value = map.getOrDefault(11, "무명씨"); //-> key가 없으면, 아규먼트 defaultValue를 리턴.
+        System.out.println(value);
+        
+        // keySet(): Map의 키(key)들로 이루어진 집합(set)을 리턴.
+        Set<Integer> keySet = map.keySet();
+        System.out.println(keySet);
+        
+        for (Integer k : keySet) {
+            System.out.println(k + " : " + map.get(k));
+        }
+        
+        // Map에 저장된 데이터 삭제: remove(key)
+        map.remove(101);
+        System.out.println(map);
+        
+        // put(key, value):
+        // (1) key가 존재하지 않으면, 새로운 key-value 쌍의 데이터를 저장.
+        // (2) key가 존재하면, 해당 키의 값을 변경.
+        map.put(10, "No Name");
+        System.out.println(map);
     }
 
 }
