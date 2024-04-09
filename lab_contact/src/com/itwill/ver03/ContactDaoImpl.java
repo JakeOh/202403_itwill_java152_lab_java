@@ -29,9 +29,12 @@ public class ContactDaoImpl implements ContactDao {
     
     @Override
     public int create(Contact contact) {
-        contacts.add(contact);
-        
-        return 1;
+        try {
+            contacts.add(contact);
+            return 1;
+        } catch (Exception e) {
+            return 0;
+        }
     }
 
     @Override
@@ -52,6 +55,7 @@ public class ContactDaoImpl implements ContactDao {
     public int update(int index, Contact contact) {
         if (isValidIndex(index)) {
             contacts.set(index, contact);
+//            contacts.get(index).setName(contact.getName());
             return 1;
         } else {
             return 0;

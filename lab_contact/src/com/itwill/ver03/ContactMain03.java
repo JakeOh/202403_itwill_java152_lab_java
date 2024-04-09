@@ -39,7 +39,7 @@ public class ContactMain03 {
                 app.deleteContactByIndex();
                 break;
             default:
-                System.out.println("메뉴 번호(0 ~ 4)를 확인하세요.");
+                System.out.println("메뉴 번호(0 ~ 5)를 확인하세요.");
             }
         }
         
@@ -124,10 +124,8 @@ public class ContactMain03 {
         List<Contact> contacts = dao.read();
         int index = 0;
         for (Contact c : contacts) {
-            if (c != null) {
-                System.out.println("[" + index + "] " + c);
-                index++;
-            }
+            System.out.println("[" + index + "] " + c);
+            index++;
         }
     }
     
