@@ -1,6 +1,8 @@
 package com.itwill.file04;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 /*
@@ -38,7 +40,7 @@ public class FileMain04 {
                 ObjectOutputStream oos = new ObjectOutputStream(out);
         ) {
             // 파일에 쓸 Product 타입의 객체를 생성
-            Product p = new Product(100, "맥북", 10_000);
+            Product p = new Product(1001, "스마트폰", 100_000);
             
             // 자바 객체를 파일에 씀.
             oos.writeObject(p);
@@ -46,6 +48,18 @@ public class FileMain04 {
             System.out.println("파일 작성 성공");
         } catch (Exception e) {
             e.printStackTrace(); // 예외 로그 출력
+        }
+        
+        // 파일에서 데이터를 읽고 자바 객체로 변환:
+        try (
+                FileInputStream in = new FileInputStream(fileName);
+                ObjectInputStream ois = new ObjectInputStream(in);
+        ) {
+            Product p = (Product) ois.readObject();
+            System.out.println(p);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
