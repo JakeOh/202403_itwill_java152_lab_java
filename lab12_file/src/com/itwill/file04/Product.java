@@ -1,6 +1,8 @@
 package com.itwill.file04;
 
-public class Product {
+import java.io.Serializable;
+
+public class Product implements Serializable {
     private int code; // 상품 코드
     private String name; // 상품 이름
     private int price; // 상품 가격
