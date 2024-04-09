@@ -26,6 +26,8 @@ public class FileMain02 {
             // (2) read(byte[] b) 메서드 사용:
             byte[] buffer = new byte[4 * 1024]; // 4,096바이트(4KB) 크기의 빈 배열 생성
             int b = in.read(buffer);
+            //-> buffer: 파일에서 읽은 내용을 저장하기 위한 바이트 배열.
+            //-> 리턴 값: 파일에서 실제로 읽은 바이트 수.
             
             if (b == -1) { // EOF
                 break; // 무한루프 종료
@@ -35,7 +37,14 @@ public class FileMain02 {
             // out.write(b); // 파일에 1바이트 씀.
             
             // (2) write(byte[] b) 메서드 사용:
-            out.write(buffer);
+            // out.write(buffer); //-> 바이트 배열의 내용을 그대로 파일에 씀. 4KB를 파일에 씀.
+            
+            // write(byte[] buf, int off, int len) 메서드 사용:
+            out.write(buffer, 0, b);
+            //-> byte[] buf: 파일에 쓸 데이터를 가지고 있는 바이트 배열.
+            //-> int off: 배열 b에서 읽기 시작할 인덱스. offset.
+            //-> int len: length. 배열에서 실제로 파일에 쓸 바이트 길이. 
+            
         }
         
         long end = System.currentTimeMillis(); // 파일 복사 종료 시간 측정
