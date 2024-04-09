@@ -1,7 +1,7 @@
 package com.itwill.file01;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 
 /*
  * 입/출력 스트림(Input/Output Stream): 프로그램에서 값을 입력받거나 출력하는 통로.
@@ -33,10 +33,31 @@ public class FileMain01 {
         String origin = "data/hello.txt"; // 원본 파일(읽을 파일) 경로, 이름.
         String destination = "data/hello_copy.txt"; // 복사할 파일 경로, 이름.
         
+        FileInputStream in = null;
+        FileOutputStream out = null;
         try {
-            FileInputStream in = new FileInputStream(origin);
-        } catch (FileNotFoundException e) {
+            in = new FileInputStream(origin); // FIS 객체 생성
+            out = new FileOutputStream(destination); // FOS 객체 생성
+            
+            while (true) {
+                int read = in.read(); // 파일에서 1바이트 읽음.
+                if (read == -1) { // 파일 끝(EOF: End-Of-File)에 도달했을 때
+                    break;
+                }
+                out.write(read); // 파일에 읽은 1바이트를 씀.
+                // System.out.println((char) read);
+            }
+            
+            System.out.println("파일 복사 성공");
+        } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            try {
+                in.close(); // FIS 객체를 닫음(리소스 해제).
+                out.close(); // FOS 객체를 닫음(리소스 해제).
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
