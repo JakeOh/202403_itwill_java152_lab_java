@@ -31,6 +31,7 @@ public class FileMain03 {
         try {
             in = new FileInputStream(origin);
             bin = new BufferedInputStream(in);
+//            bin = new BufferedInputStream(new FileInputStream(origin));
             
             out = new FileOutputStream(dest);
             bout = new BufferedOutputStream(out);
