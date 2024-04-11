@@ -57,8 +57,8 @@ public class FileMain05 {
             
             System.out.println("파일 읽기 시간: " + (end - start) + "ms");
             System.out.println("size = " + products.size());
-            System.out.println(products.getFirst());
-            System.out.println(products.getLast());
+            System.out.println(products.getFirst()); // products.get(0)
+            System.out.println(products.getLast()); // products.get(products.size() - 1)
             
         } catch (Exception e) {
             e.printStackTrace();
