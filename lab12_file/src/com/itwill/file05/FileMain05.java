@@ -18,7 +18,7 @@ public class FileMain05 {
         for (int i = 0; i < 1_000_000; i++) {
             list.add(new Product(i, "name_" + i, i));
         }
-        System.out.println("size = " + list.size());
+        System.out.println("dummy size = " + list.size());
         
         // ArrayList를 저장하는 파일 이름
         String fileName = "data/product_list.dat";
