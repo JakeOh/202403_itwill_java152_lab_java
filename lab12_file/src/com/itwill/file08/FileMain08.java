@@ -53,6 +53,24 @@ public class FileMain08 {
         System.out.println("폴더 여부: " + f.isDirectory());
         System.out.println("파일 크기: " + f.length() + "바이트");
         
+        // 새 폴더 만들기
+        File testFolder = new File("test");
+//        System.out.println(testFolder.getAbsolutePath());
+        if (testFolder.exists()) {
+            System.out.println("이미 폴더가 존재...");
+        } else {
+            testFolder.mkdir(); // make directory
+            System.out.println("폴더 생성 성공");
+        }
+        
+        // 폴더 삭제
+        if (testFolder.exists()) {
+            testFolder.delete();
+            System.out.println("폴더 삭제 성공");
+        } else {
+            System.out.println("폴더가 존재하지 않음...");
+        }
+        
     }
 
 }
