@@ -1,5 +1,6 @@
 package com.itwill.inner01;
 
+import com.itwill.inner01.EnclosingCls.NestedCls;
 import com.itwill.inner01.OuterCls.InnerCls;
 
 /*
@@ -50,6 +51,10 @@ public class InnerMain01 {
         InnerCls inner2 = outer1.new InnerCls(200);
         inner2.info();
         
+        // OuterCls.InnerCls inner3;
+        InnerCls inner3 = new OuterCls(10, 20, "점심시간").new InnerCls(123);
+        inner3.info();
+        
         // EnclosingCls의 static field
         System.out.println("EnclosingCls.var = " + EnclosingCls.var);
         
@@ -59,6 +64,14 @@ public class InnerMain01 {
         // EnclosingCls 타입 객체 생성
         EnclosingCls encl = new EnclosingCls(123);
         System.out.println(encl); // toString()
+        
+        // NestedCls 타입 객체 생성
+        EnclosingCls.NestedCls nested1 = new EnclosingCls.NestedCls(1);
+        nested1.info();
+        
+        // 중첩 클래스 NestedCls 이름을 import한 경우
+        NestedCls nested2 = new NestedCls(100);
+        nested2.info();
         
     }
 

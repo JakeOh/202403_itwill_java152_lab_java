@@ -37,6 +37,6 @@ public class EnclosingCls {
             // 외부 클래스의 static 멤버만 사용 가능하고,
             // 외부 클래스의 non-static 멤버들은 사용할 수 없음!
         }
-    }
+    } // end class NestedCls
 
-}
+} // end class EnclosingCls
