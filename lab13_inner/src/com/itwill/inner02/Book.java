@@ -37,5 +37,40 @@ public class Book {
         return String.format("Book(제목:%s, 저자:%s, 출판사:%s)", 
                 title, author, publisher);
     }
+    
+    //--- Builder(Factory) 디자인 패턴
+    public static BookBuilder builder() {
+        return new BookBuilder();
+        // 외부 클래스에서 내부 클래스의 private 생성자를 호출할 수 있음.
+    }
+    
+    public static class BookBuilder {
+        private String title;
+        private String author;
+        private String publisher;
+        
+        private BookBuilder() {}
+        
+        public BookBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+        
+        public BookBuilder author(String author) {
+            this.author = author;
+            return this;
+        }
+        
+        public BookBuilder publisher(String publisher) {
+            this.publisher = publisher;
+            return this;
+        }
+        
+        public Book build() {
+            return new Book(title, author, publisher);
+        }
+        
+    } // end class BookBuilder
+    //--- Builder(Factory) 디자인 패턴
 
-}
+} // end class Book
