@@ -40,6 +40,9 @@ public class LambdaMain01 {
         result = calc.calculate((x, y) -> x / y);
         System.out.println("result = " + result);
         
+        result = calc.calculate((x, y) -> x * x + y * y);
+        System.out.println("result = " + result);
+        
         /*
          * 람다 표현식(lambda expression):
          * 익명 클래스 객체를 간단히 작성하기 위한 문법.
