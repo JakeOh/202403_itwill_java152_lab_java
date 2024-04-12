@@ -1,5 +1,7 @@
 package com.itwill.inner01;
 
+import com.itwill.inner01.OuterCls.InnerCls;
+
 /*
  * 변수 선언 위치:
  * 1. 필드: 클래스의 멤버로 선언하는 변수. 접근 수식어(private, protected, public)를 사용할 수 있음.
@@ -36,6 +38,27 @@ package com.itwill.inner01;
 public class InnerMain01 {
     
     public static void main(String[] args) {
+        // OuterCls 타입의 객체를 생성
+        OuterCls outer1 = new OuterCls(1, 2, "Java");
+        System.out.println(outer1);
+        
+        // InnerCls 타입이 객체를 생성
+        OuterCls.InnerCls inner1 = outer1.new InnerCls(100);
+        inner1.info();
+        
+        // 내부 클래스 이름을 import한 경우
+        InnerCls inner2 = outer1.new InnerCls(200);
+        inner2.info();
+        
+        // EnclosingCls의 static field
+        System.out.println("EnclosingCls.var = " + EnclosingCls.var);
+        
+        // EnclosingCls의 static method
+        EnclosingCls.test();
+        
+        // EnclosingCls 타입 객체 생성
+        EnclosingCls encl = new EnclosingCls(123);
+        System.out.println(encl); // toString()
         
     }
 
