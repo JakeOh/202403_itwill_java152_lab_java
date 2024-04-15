@@ -110,6 +110,21 @@ public class LambdaMain04 {
                 .average()
                 .orElseThrow();
         System.out.println("mean=" + mean);
+        
+        // Ex8. 직원들 중 대리는 몇 명?
+        System.out.println("--- Ex8. ---");
+        count = 0;
+        for (Employee e : employees) {
+            if (e.getJobTitle().equals("대리")) {
+                count++;
+            }
+        }
+        System.out.println("count=" + count);
+        
+        long empCount = employees.stream()
+                .filter((e) -> e.getJobTitle().equals("대리"))
+                .count();
+        System.out.println("empCount=" + empCount);
     }
 
 }
