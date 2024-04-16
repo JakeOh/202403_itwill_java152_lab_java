@@ -52,7 +52,7 @@ public class AppMain04 {
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 502, 453);
+        frame.setBounds(100, 100, 686, 453);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         
@@ -63,7 +63,7 @@ public class AppMain04 {
         
         textNumber1 = new JTextField();
         textNumber1.setFont(new Font("D2Coding", Font.PLAIN, 32));
-        textNumber1.setBounds(144, 10, 320, 64);
+        textNumber1.setBounds(144, 10, 514, 64);
         frame.getContentPane().add(textNumber1);
         textNumber1.setColumns(10);
         
@@ -75,25 +75,14 @@ public class AppMain04 {
         textNumber2 = new JTextField();
         textNumber2.setFont(new Font("D2Coding", Font.PLAIN, 32));
         textNumber2.setColumns(10);
-        textNumber2.setBounds(144, 84, 320, 64);
+        textNumber2.setBounds(144, 84, 514, 64);
         frame.getContentPane().add(textNumber2);
         
         btnPlus = new JButton("+");
         btnPlus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double x = 0;
-                double y = 0;
-                try {
-                    x = Double.parseDouble(textNumber1.getText());
-                    y = Double.parseDouble(textNumber2.getText());
-                } catch (NumberFormatException ex) {
-                    textResult.setText("Number1 또는 Number2에는 숫자를 입력하세요.");
-                    return;
-                }
-                double result = x + y;
-                String msg = String.format("%f + %f = %f", x, y, result);
-                textResult.setText(msg);
+                handleButtonClick(e);
             }
         });
         btnPlus.setFont(new Font("D2Coding", Font.BOLD, 32));
@@ -101,23 +90,68 @@ public class AppMain04 {
         frame.getContentPane().add(btnPlus);
         
         btnMinus = new JButton("-");
+        btnMinus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleButtonClick(e);
+            }
+        });
         btnMinus.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnMinus.setBounds(88, 158, 64, 64);
         frame.getContentPane().add(btnMinus);
         
         btnMultiply = new JButton("x");
+        btnMultiply.addActionListener((e) -> handleButtonClick(e));
         btnMultiply.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnMultiply.setBounds(164, 158, 64, 64);
         frame.getContentPane().add(btnMultiply);
         
         btnDivide = new JButton("/");
+        btnDivide.addActionListener((e) -> handleButtonClick(e));
         btnDivide.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnDivide.setBounds(240, 158, 64, 64);
         frame.getContentPane().add(btnDivide);
         
         textResult = new JTextArea();
         textResult.setFont(new Font("D2Coding", Font.PLAIN, 32));
-        textResult.setBounds(12, 232, 452, 157);
+        textResult.setBounds(12, 232, 646, 157);
         frame.getContentPane().add(textResult);
     }
+    
+    private void handleButtonClick(ActionEvent event) {
+        // JTextField에 입력된 문자열을 숫자(double)로 변환
+        double x = 0;
+        double y = 0;
+        try {
+            x = Double.parseDouble(textNumber1.getText());
+            y = Double.parseDouble(textNumber2.getText());
+        } catch (NumberFormatException ex) {
+            textResult.setText("Number1 또는 Number2에는 숫자로 입력...");
+            return; // 메서드 종료
+        }
+        
+        double result = 0; // 사칙연산 결과를 저장할 변수
+        String operator = ""; // 사칙연산 기호(+, -, x, /)를 저장할 변수
+        
+        Object source = event.getSource(); // 이벤트가 발생한 소스(UI 컴포넌트)
+        if (source == btnPlus) {
+            result = x + y;
+            operator = "+";
+        } else if (source == btnMinus) {
+            result = x - y;
+            operator = "-";
+        } else if (source == btnMultiply) {
+            result = x * y;
+            operator = "x";
+        } else if (source == btnDivide) {
+            result = x / y;
+            operator = "/";
+        }
+        
+        // 결과창에 보여줄 문자열
+        String msg = String.format("%f %s %f = %f", x, operator, y, result);
+        textResult.setText(msg);
+        
+    }
+    
 }
