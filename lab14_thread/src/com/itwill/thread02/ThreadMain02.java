@@ -40,8 +40,45 @@ public class ThreadMain02 {
         // (3) Thread 객체 생성 - Runnable 인터페이스 구현 객체를 아규먼트로 전달.
         Thread th1 = new Thread(new MyRunnable("지역 클래스"));
         
+        // 익명 클래스 객체를 사용한 쓰레드 생성
+        Thread th2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 100; i++) {
+                    System.out.println(i + " - 익명(Anonymous) 클래스");
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        
+        // 람다 표현식을 사용한 쓰레드 객체 생성
+        Thread th3 = new Thread(() -> {
+            for (int i = 0; i < 100; i++) {
+                System.out.println(i + " - 람다(Lambda)");
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        
         // (4) Thread 실행
         th1.start();
+        th2.start();
+        th3.start();
+        
+        try {
+            th1.join();
+            th2.join();
+            th3.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         
         System.out.println("***** main 프로세스 종료 *****");
     }
