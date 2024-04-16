@@ -108,6 +108,7 @@ public class AppMain04 {
         
         btnDivide = new JButton("/");
         btnDivide.addActionListener(this::handleButtonClick);
+        // AppMain04.this::handleButtonClick
         btnDivide.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnDivide.setBounds(240, 158, 64, 64);
         frame.getContentPane().add(btnDivide);
