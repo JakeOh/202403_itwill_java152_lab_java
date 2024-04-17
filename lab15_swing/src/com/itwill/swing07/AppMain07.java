@@ -14,6 +14,8 @@ public class AppMain07 {
     private JFrame frame;
     private JButton btnMsgDlg;
     private JButton btnConfirmDlg;
+    private JButton btnInputDlg;
+    private JButton btnCustomDlg;
 
     /**
      * Launch the application.
@@ -83,6 +85,40 @@ public class AppMain07 {
         btnConfirmDlg.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnConfirmDlg.setBounds(12, 84, 410, 64);
         frame.getContentPane().add(btnConfirmDlg);
+        
+        btnInputDlg = new JButton("Input Dialog");
+        btnInputDlg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 입력 다이얼로그 보여주기
+//                String result = JOptionPane.showInputDialog(frame, "검색어");
+                
+                final String[] selections = {"인*", "얼굴장부", "X", "너튜브"};
+                Object result = JOptionPane.showInputDialog(
+                        frame, // 부모 컴포넌트
+                        "검색어 입력", // 메시지
+                        "검색어", // 타이틀
+                        JOptionPane.PLAIN_MESSAGE, // 메시지 타입 - 메시지 기본 아이콘
+                        null, // 아이콘
+                        selections, // 선택할 값들
+                        selections[1]); // 초기 선택값
+                btnInputDlg.setText("입력: " + result);
+            }
+        });
+        btnInputDlg.setFont(new Font("D2Coding", Font.BOLD, 32));
+        btnInputDlg.setBounds(12, 158, 410, 64);
+        frame.getContentPane().add(btnInputDlg);
+        
+        btnCustomDlg = new JButton("Custom Dialog");
+        btnCustomDlg.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO 내가 만든 다이얼로그 보여주기
+            }
+        });
+        btnCustomDlg.setFont(new Font("D2Coding", Font.BOLD, 32));
+        btnCustomDlg.setBounds(12, 232, 410, 64);
+        frame.getContentPane().add(btnCustomDlg);
     }
 
 }
