@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class AppMain06 {
@@ -31,6 +32,9 @@ public class AppMain06 {
     private JScrollPane scrollPane;
     private JTextArea textArea;
 
+//    private JRadioButton selectedRadioButton;
+//    private ArrayList<JCheckBox> selectedCheckBoxes = new ArrayList<>();
+    
     /**
      * Launch the application.
      */
@@ -127,6 +131,12 @@ public class AppMain06 {
         frame.getContentPane().add(cbStatic);
         
         comboBox = new JComboBox<>(); // new JComboBox<String>();
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                handleComboBoxChange(e);
+            }
+        });
         comboBox.setFont(new Font("D2Coding", Font.PLAIN, 32));
         final String[] emails = {"naver.com", "gmail.com", "kakao.com", "yahoo.com"};
         final DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(emails);
@@ -135,6 +145,7 @@ public class AppMain06 {
         frame.getContentPane().add(comboBox);
         
         btnInfo = new JButton("확인");
+        btnInfo.addActionListener((e) -> handleButtonClick());
         btnInfo.setFont(new Font("D2Coding", Font.PLAIN, 32));
         btnInfo.setBounds(363, 155, 172, 64);
         frame.getContentPane().add(btnInfo);
@@ -148,6 +159,56 @@ public class AppMain06 {
         scrollPane.setViewportView(textArea);
     }
     
+    private void handleButtonClick() {
+        // JTextArea에 출력할 문자열들을 붙여 나갈(append) 문자열 버퍼
+        StringBuffer buffer = new StringBuffer();
+        
+        // 어떤 라디오버튼이 선택됐는 지
+        if (rbPrivate.isSelected()) {
+            buffer.append(rbPrivate.getText());
+        } else if (rbPackage.isSelected()) {
+            buffer.append(rbPackage.getText());
+        } else if (rbProtected.isSelected()) {
+            buffer.append(rbProtected.getText());
+        } else {
+            buffer.append(rbPublic.getText());
+        }
+        buffer.append(" 라디오버튼 선택됨.\n");
+        
+        // 어떤 체크박스(들)이 선택됐는 지
+        if (cbAbstract.isSelected()) {
+            buffer.append(cbAbstract.getText()).append(" ");
+        }
+        if (cbFinal.isSelected()) {
+            buffer.append(cbFinal.getText()).append(" ");
+        }
+        if (cbStatic.isSelected()) {
+            buffer.append(cbStatic.getText()).append(" ");
+        }
+        buffer.append("체크박스 선택됨.\n");
+        
+        // 콤보박스에서 선택된 아이템
+        Object selectedItem = comboBox.getSelectedItem();
+        buffer.append(selectedItem)
+                .append(" 콤보박스 아이템 선택됨.\n");
+        
+        // 문자열 버퍼의 내용을 JTextArea에 씀.
+        textArea.setText(buffer.toString());
+    }
+
+    private void handleComboBoxChange(ActionEvent event) {
+        // 이벤트가 발생한 컴포넌트(JComboBox) 찾기
+        @SuppressWarnings("unchecked")
+        JComboBox<String> combo = (JComboBox<String>) event.getSource();
+        
+        // 콤보박스에서 선택된 아이템 찾기
+        int index = combo.getSelectedIndex(); // 콤보박스에서 선택된 아이템의 인덱스
+        String item = (String) combo.getSelectedItem(); // 콤보박스에서 선택된 아이템
+        
+        // JTextArea에 정보 출력
+        textArea.setText(index + ": " + item);
+    }
+
     private void handleCheckBoxClick(ActionEvent event) {
         // 3개의 체크박스들 중에서 누가 클릭됐는 지
         JCheckBox cb = (JCheckBox) event.getSource();
