@@ -113,7 +113,8 @@ public class AppMain07 {
         btnCustomDlg.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO 내가 만든 다이얼로그 보여주기
+                // 내가 만든 다이얼로그 보여주기
+                MyDialog.showMyDialog();
             }
         });
         btnCustomDlg.setFont(new Font("D2Coding", Font.BOLD, 32));
