@@ -16,6 +16,7 @@ public class AppMain07 {
     private JButton btnConfirmDlg;
     private JButton btnInputDlg;
     private JButton btnCustomDlg;
+    private JButton btnMyFrame;
 
     /**
      * Launch the application.
@@ -114,12 +115,17 @@ public class AppMain07 {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 내가 만든 다이얼로그 보여주기
-                MyDialog.showMyDialog();
+                MyDialog.showMyDialog(frame);
             }
         });
         btnCustomDlg.setFont(new Font("D2Coding", Font.BOLD, 32));
         btnCustomDlg.setBounds(12, 232, 410, 64);
         frame.getContentPane().add(btnCustomDlg);
+        
+        btnMyFrame = new JButton("Custom Frame");
+        btnMyFrame.setFont(new Font("D2Coding", Font.BOLD, 32));
+        btnMyFrame.setBounds(12, 301, 410, 64);
+        frame.getContentPane().add(btnMyFrame);
     }
 
 }
