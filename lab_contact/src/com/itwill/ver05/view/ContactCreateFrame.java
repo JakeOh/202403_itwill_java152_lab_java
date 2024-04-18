@@ -1,26 +1,29 @@
 package com.itwill.ver05.view;
 
+import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import com.itwill.ver05.controller.ContactDao;
 import com.itwill.ver05.controller.ContactDaoImpl;
 import com.itwill.ver05.model.Contact;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class ContactCreateFrame extends JFrame {
+    
+    public interface CreateNotify {
+        public void notifyContactCreated();
+    }
+    
+    private CreateNotify app;
+    //-> 연락처 저장 성공을 알려줄 객체.
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -42,11 +45,11 @@ public class ContactCreateFrame extends JFrame {
     /**
      * Launch the application.
      */
-    public static void showContactCreateFrame(Component parentComponent) {
+    public static void showContactCreateFrame(Component parentComponent, CreateNotify app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactCreateFrame frame = new ContactCreateFrame(parentComponent);
+                    ContactCreateFrame frame = new ContactCreateFrame(parentComponent, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -58,8 +61,9 @@ public class ContactCreateFrame extends JFrame {
     /**
      * Create the frame.
      */
-    public ContactCreateFrame(Component parentComponent) {
+    public ContactCreateFrame(Component parentComponent, CreateNotify app) {
         this.parentComponent = parentComponent;
+        this.app = app;
         initialize();
     }
     
@@ -150,7 +154,8 @@ public class ContactCreateFrame extends JFrame {
         // 3. DAO를 사용해서 파일에 저장
         int result = dao.create(contact);
         if (result == 1) { // 연락처 저장 성공
-            // TODO ContactMain에게 연락처 저장이 성공됐음을 알려줌.
+            // ContactMain에게 연락처 저장이 성공됐음을 알려줌.
+            app.notifyContactCreated();
             dispose(); // 현재 창 닫기
         } else { // 연락처 저장 실패
             // TODO 사용자에게 저장 실패 메시지 보여주기

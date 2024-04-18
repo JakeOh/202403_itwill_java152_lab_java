@@ -1,14 +1,14 @@
 package com.itwill.ver05.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -16,10 +16,9 @@ import javax.swing.table.DefaultTableModel;
 import com.itwill.ver05.controller.ContactDao;
 import com.itwill.ver05.controller.ContactDaoImpl;
 import com.itwill.ver05.model.Contact;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import com.itwill.ver05.view.ContactCreateFrame.CreateNotify;
 
-public class ContactMain05 {
+public class ContactMain05 implements CreateNotify {
     
     private static final String[] COLUMN_NAMES = { "이름", "전화번호" };
 
@@ -73,7 +72,7 @@ public class ContactMain05 {
         
         btnCreate = new JButton("새 연락처");
         btnCreate.addActionListener((e) -> 
-                ContactCreateFrame.showContactCreateFrame(frame)
+                ContactCreateFrame.showContactCreateFrame(frame, ContactMain05.this)
         );
         btnCreate.setFont(new Font("D2Coding", Font.BOLD, 28));
         buttonPanel.add(btnCreate);
@@ -109,6 +108,19 @@ public class ContactMain05 {
             model.addRow(row);
         }
         
+    }
+
+    @Override // ContactCreateFrame.CreateNotify 인터페이스의 메서드 재정의
+    public void notifyContactCreated() {
+        // 데이터를 모두 지운 새로운 테이블 모델 객체를 생성
+        model = new DefaultTableModel(null, COLUMN_NAMES);
+        // 파일에 저장된 연락처(새 연락처가 추가된 데이터)를 로딩
+        loadContactData();
+        // 새 테이블 모델을 테이블에 다시 세팅
+        table.setModel(model);
+        
+        // 사용자에게 알림
+        JOptionPane.showMessageDialog(frame, "새 연락처 저장 성공!");
     }
 
 }
