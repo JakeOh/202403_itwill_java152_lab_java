@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -29,6 +31,7 @@ public class AppMain08 {
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel model;
+    private JButton btnDelete;
 
     /**
      * Launch the application.
@@ -103,7 +106,7 @@ public class AppMain08 {
             }
         });
         btnEnter.setFont(new Font("D2Coding", Font.BOLD, 32));
-        btnEnter.setBounds(12, 232, 508, 64);
+        btnEnter.setBounds(12, 232, 235, 64);
         frame.getContentPane().add(btnEnter);
         
         scrollPane = new JScrollPane();
@@ -114,6 +117,41 @@ public class AppMain08 {
         model = new DefaultTableModel(null, COLUMN_NAMES);
         table.setModel(model);
         scrollPane.setViewportView(table);
+        
+        btnDelete = new JButton("삭제");
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteScoreFromTable();
+            }
+        });
+        btnDelete.setFont(new Font("D2Coding", Font.BOLD, 32));
+        btnDelete.setBounds(285, 232, 235, 64);
+        frame.getContentPane().add(btnDelete);
+    }
+
+    private void deleteScoreFromTable() {
+        // JTable에서 선택된 행의 인덱스를 찾음.
+        int index = table.getSelectedRow();
+        if (index == -1) { // 테이블에서 선택된 행이 없을 때
+            JOptionPane.showMessageDialog(frame, 
+                    "테이블에서 삭제할 행을 먼저 선택하세요...", 
+                    "경고", 
+                    JOptionPane.WARNING_MESSAGE);
+            
+            return;
+        }
+        
+        // 삭제 여부를 사용자에게 확인
+        int confirm = JOptionPane.showConfirmDialog(
+                frame, 
+                "정말 삭제할까요?", 
+                "삭제 확인", 
+                JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            model.removeRow(index); // 테이블 (모델)에서 해당 인덱스의 행(row)를 삭제
+        }
+        
     }
 
     private void inputScoreToTable() {
@@ -124,10 +162,12 @@ public class AppMain08 {
         try {
             korean = Integer.parseInt(textKorean.getText());
             english = Integer.parseInt(textEnglish.getText());
-            math = Integer.parseInt(textEnglish.getText());
+            math = Integer.parseInt(textMath.getText());
         } catch (NumberFormatException e) {
-            // TODO 메시지 다이얼로그 띄우기
-            
+            JOptionPane.showMessageDialog(frame, 
+                    "국어, 영어, 수학 점수는 정수로 입력...", 
+                    "입력 오류", 
+                    JOptionPane.ERROR_MESSAGE);
             return;
         }
         
@@ -135,6 +175,14 @@ public class AppMain08 {
         Score score = new Score(korean, english, math);
         
         // 3. JTable에 행(row)을 추가.
+        Object[] row = {
+                score.getKorean(),
+                score.getEnglish(),
+                score.getMath(),
+                score.getTotal(),
+                score.getMean(),
+        };
+        model.addRow(row);
         
         // 4. JTextField의 내용을 모두 지움.
         clearAllTextFields();
@@ -145,5 +193,4 @@ public class AppMain08 {
         textEnglish.setText("");
         textMath.setText("");
     }
-    
 }
