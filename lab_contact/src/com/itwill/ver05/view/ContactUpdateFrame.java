@@ -29,7 +29,7 @@ public class ContactUpdateFrame extends JFrame {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
+    public static void showContactUpdateFrame() {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -46,7 +46,12 @@ public class ContactUpdateFrame extends JFrame {
      * Create the frame.
      */
     public ContactUpdateFrame() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initialize();
+    }
+    
+    public void initialize() {
+        setTitle("연락처 업데이트");
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 542, 367);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
