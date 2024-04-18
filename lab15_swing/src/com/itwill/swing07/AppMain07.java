@@ -4,12 +4,15 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+
+import com.itwill.swing07.MyFrame.Notifiable;
+
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class AppMain07 {
+public class AppMain07 implements Notifiable {
 
     private JFrame frame;
     private JButton btnMsgDlg;
@@ -18,6 +21,7 @@ public class AppMain07 {
     private JButton btnCustomDlg;
     private JButton btnMyFrame;
 
+    @Override
     public void notifyMessage(String message) {
         btnMyFrame.setText(message);
     }
@@ -132,6 +136,9 @@ public class AppMain07 {
             public void actionPerformed(ActionEvent e) {
                 // JFrame을 상속받는 객체 보여주기
                 MyFrame.showMyFrame(frame, AppMain07.this);
+                //-> 아규먼트 frame: MyFrame 클래스가 부모 컴포넌트(JFrame) 정보를 사용할 수 있도록.
+                //-> 아규먼트 AppMain07.this: AppMain07 타입으로 생성된 객체(의 주소). 현재 객체.
+                //   MyFrame 클래스에서 AppMain07 객체의 public 메서드를 호출할 수 있도록.
             }
         });
         btnMyFrame.setFont(new Font("D2Coding", Font.BOLD, 32));

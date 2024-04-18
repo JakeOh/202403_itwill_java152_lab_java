@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class MyFrame extends JFrame {
+    public interface Notifiable {
+        public void notifyMessage(String msg);
+    }
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -20,12 +23,12 @@ public class MyFrame extends JFrame {
     private JButton btn;
 
     private Component parentComponet; // 부모 컴포넌트를 저장하기 위한 필드
-    private AppMain07 app; // 메인 쓰레드 주소를 저장할 필드
+    private Notifiable app; // notifyMessage(String msg) 메서드를 갖는 객체의 주소를 저장할 필드
     
     /**
      * Launch the application.
      */
-    public static void showMyFrame(Component parentComponent, AppMain07 app) {
+    public static void showMyFrame(Component parentComponent, Notifiable app) {
         /*
          * Component
          * |__ JFrame, JDialog
@@ -46,7 +49,7 @@ public class MyFrame extends JFrame {
     /**
      * Create the frame.
      */
-    public MyFrame(Component parentComponet, AppMain07 app) {
+    public MyFrame(Component parentComponet, Notifiable app) {
         this.parentComponet = parentComponet;
         this.app = app;
         initialize();
