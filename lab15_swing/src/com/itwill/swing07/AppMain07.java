@@ -18,6 +18,10 @@ public class AppMain07 {
     private JButton btnCustomDlg;
     private JButton btnMyFrame;
 
+    public void notifyMessage(String message) {
+        btnMyFrame.setText(message);
+    }
+    
     /**
      * Launch the application.
      */
@@ -126,7 +130,8 @@ public class AppMain07 {
         btnMyFrame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO JFrame을 상속받는 객체 보여주기
+                // JFrame을 상속받는 객체 보여주기
+                MyFrame.showMyFrame(frame, AppMain07.this);
             }
         });
         btnMyFrame.setFont(new Font("D2Coding", Font.BOLD, 32));
