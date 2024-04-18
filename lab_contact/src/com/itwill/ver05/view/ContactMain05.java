@@ -7,12 +7,17 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.util.List;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import com.itwill.ver05.controller.ContactDao;
 import com.itwill.ver05.controller.ContactDaoImpl;
+import com.itwill.ver05.model.Contact;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ContactMain05 {
     
@@ -61,11 +66,15 @@ public class ContactMain05 {
         frame = new JFrame();
         frame.setBounds(100, 100, 560, 484);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("연락처 v0.5");
         
         buttonPanel = new JPanel();
         frame.getContentPane().add(buttonPanel, BorderLayout.NORTH);
         
         btnCreate = new JButton("새 연락처");
+        btnCreate.addActionListener((e) -> 
+                ContactCreateFrame.showContactCreateFrame(frame)
+        );
         btnCreate.setFont(new Font("D2Coding", Font.BOLD, 28));
         buttonPanel.add(btnCreate);
         
@@ -91,7 +100,15 @@ public class ContactMain05 {
     }
     
     private void loadContactData() {
-        // TODO
+        // DAO를 사용해서 파일에 저장된 데이터를 읽어옴.
+        List<Contact> list = dao.read();
+        
+        // 리스트의 연락처들을 테이블에 행으로 추가.
+        for (Contact c : list) {
+            Object[] row = { c.getName(), c.getPhone() };
+            model.addRow(row);
+        }
+        
     }
 
 }
