@@ -17,10 +17,12 @@ import com.itwill.ver05.controller.ContactDao;
 import com.itwill.ver05.controller.ContactDaoImpl;
 import com.itwill.ver05.model.Contact;
 import com.itwill.ver05.view.ContactCreateFrame.CreateNotify;
+import com.itwill.ver05.view.ContactUpdateFrame.UpdateNotify;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ContactMain05 implements CreateNotify {
+public class ContactMain05 implements CreateNotify, UpdateNotify {
     
     private static final String[] COLUMN_NAMES = { "이름", "전화번호" };
 
@@ -113,7 +115,7 @@ public class ContactMain05 implements CreateNotify {
         }
         
         // 업데이트 프레임(JFrame)을 실행
-        ContactUpdateFrame.showContactUpdateFrame(frame, index);
+        ContactUpdateFrame.showContactUpdateFrame(frame, index, ContactMain05.this);
     }
     
     private void deleteContact() {
@@ -173,6 +175,16 @@ public class ContactMain05 implements CreateNotify {
         
         // 사용자에게 알림
         JOptionPane.showMessageDialog(frame, "새 연락처 저장 성공!");
+    }
+
+    @Override
+    public void notifyContactUpdated() {
+        // ContactUpdateFrame에서 연락처 정보를 성공적으로 업데이트하면 호출하는 메서드
+        // 테이블을 새로 그림(리셋)
+        resetTable();
+        
+        // 사용자에게 메시지
+        JOptionPane.showMessageDialog(frame, "연락처 업데이트 성공!");
     }
 
 }

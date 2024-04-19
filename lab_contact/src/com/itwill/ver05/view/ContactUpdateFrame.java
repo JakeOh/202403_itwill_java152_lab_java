@@ -17,6 +17,12 @@ import com.itwill.ver05.controller.ContactDaoImpl;
 import com.itwill.ver05.model.Contact;
 
 public class ContactUpdateFrame extends JFrame {
+    
+    public interface UpdateNotify {
+        void notifyContactUpdated();
+    }
+    
+    private UpdateNotify app; // 메인 쓰레드 주소를 저장하기 위한 객체
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -39,11 +45,11 @@ public class ContactUpdateFrame extends JFrame {
     /**
      * Launch the application.
      */
-    public static void showContactUpdateFrame(Component parentComponent, int index) {
+    public static void showContactUpdateFrame(Component parentComponent, int index, UpdateNotify app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index);
+                    ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -55,9 +61,11 @@ public class ContactUpdateFrame extends JFrame {
     /**
      * Create the frame.
      */
-    public ContactUpdateFrame(Component parentComponent, int index) {
+    public ContactUpdateFrame(Component parentComponent, int index, UpdateNotify app) {
         this.parentComponent = parentComponent;
         this.index = index;
+        this.app = app;
+        
         initialize();
         initializeTextFields();
     }
@@ -133,11 +141,32 @@ public class ContactUpdateFrame extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.SOUTH);
         
         btnSave = new JButton("저장");
+        btnSave.addActionListener((e) -> updateContact());
         btnSave.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnSave);
         
         btnCancel = new JButton("취소");
+        btnCancel.addActionListener((e) -> dispose());
         btnCancel.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnCancel);
     }
+    
+    private void updateContact() {
+        // 업데이트할 내용을 읽음.
+        String name = textName.getText();
+        String phone = textPhone.getText();
+        String email = textEmail.getText();
+        Contact contact = new Contact(0, name, phone, email);
+        
+        int result = dao.update(index, contact);
+        if (result == 1) {
+            // 메인 쓰레드에게 업데이트 성공을 알려줌.
+            app.notifyContactUpdated();
+            
+            dispose(); // 현재 창 닫기.
+        } else {
+            // TODO 업데이트 실패 메시지 보여주기
+        }
+    }
+    
 }
