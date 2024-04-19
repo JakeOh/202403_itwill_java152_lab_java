@@ -80,9 +80,7 @@ public class ContactMain05 implements CreateNotify {
         buttonPanel.add(btnCreate);
         
         btnUpdate = new JButton("업데이트");
-        btnUpdate.addActionListener((e) -> 
-                ContactUpdateFrame.showContactUpdateFrame()
-        );
+        btnUpdate.addActionListener((e) -> updateContact());
         btnUpdate.setFont(new Font("D2Coding", Font.BOLD, 28));
         buttonPanel.add(btnUpdate);
         
@@ -102,6 +100,20 @@ public class ContactMain05 implements CreateNotify {
         model = new DefaultTableModel(null, COLUMN_NAMES);
         table.setModel(model);
         scrollPane.setViewportView(table);
+    }
+    
+    private void updateContact() {
+        // 테이블에서 업데이트하기 위해서 선택한 행의 인덱스를 찾음.
+        int index = table.getSelectedRow();
+        if (index == -1) {
+            JOptionPane.showMessageDialog(frame, 
+                    "먼저 테이블에서 업데이트할 행을 선택하세요...");
+            
+            return;
+        }
+        
+        // 업데이트 프레임(JFrame)을 실행
+        ContactUpdateFrame.showContactUpdateFrame(frame, index);
     }
     
     private void deleteContact() {

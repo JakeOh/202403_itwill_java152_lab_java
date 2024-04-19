@@ -1,15 +1,20 @@
 package com.itwill.ver05.view;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
+import java.awt.Component;
+import java.awt.EventQueue;
 import java.awt.Font;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import com.itwill.ver05.controller.ContactDao;
+import com.itwill.ver05.controller.ContactDaoImpl;
+import com.itwill.ver05.model.Contact;
 
 public class ContactUpdateFrame extends JFrame {
 
@@ -26,14 +31,19 @@ public class ContactUpdateFrame extends JFrame {
     private JLabel lblPhone;
     private JLabel lblEmail;
 
+    private Component parentComponent; // 부모 컴포넌트를 저장하기 위해서
+    private int index; // 업데이트할 연락처의 (리스트) 인덱스를 저장하기 위해서
+    
+    private ContactDao dao = ContactDaoImpl.getInstance();
+    
     /**
      * Launch the application.
      */
-    public static void showContactUpdateFrame() {
+    public static void showContactUpdateFrame(Component parentComponent, int index) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ContactUpdateFrame frame = new ContactUpdateFrame();
+                    ContactUpdateFrame frame = new ContactUpdateFrame(parentComponent, index);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -45,14 +55,37 @@ public class ContactUpdateFrame extends JFrame {
     /**
      * Create the frame.
      */
-    public ContactUpdateFrame() {
+    public ContactUpdateFrame(Component parentComponent, int index) {
+        this.parentComponent = parentComponent;
+        this.index = index;
         initialize();
+        initializeTextFields();
+    }
+    
+    private void initializeTextFields() {
+        // 3개의 텍스트필드에 해당 인덱스의 연락처 정보를 채움.
+        Contact contact = dao.read(index);
+        textName.setText(contact.getName());
+        textPhone.setText(contact.getPhone());
+        textEmail.setText(contact.getEmail());
     }
     
     public void initialize() {
         setTitle("연락처 업데이트");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 542, 367);
+        
+        int x = 0;
+        int y = 0;
+        if (parentComponent != null) {
+            x = parentComponent.getX();
+            y = parentComponent.getY();
+        }
+        setBounds(x, y, 542, 367);
+        
+        if (parentComponent == null) {
+            setLocationRelativeTo(null);
+        }
+        
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
