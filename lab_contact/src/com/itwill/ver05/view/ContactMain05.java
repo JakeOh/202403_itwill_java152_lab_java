@@ -92,6 +92,9 @@ public class ContactMain05 implements CreateNotify, UpdateNotify {
         buttonPanel.add(btnDelete);
         
         btnSearch = new JButton("검색");
+        btnSearch.addActionListener((e) ->
+                ContactSearchFrame.showContactSearchFrame(frame)
+        );
         btnSearch.setFont(new Font("D2Coding", Font.BOLD, 28));
         buttonPanel.add(btnSearch);
         
