@@ -50,3 +50,34 @@ select deptno, dname from dept order by dname;
 
 -- 부서 테이블에서 부서 이름을 내림차순 정렬 출력
 select deptno, dname from dept order by dname desc;
+
+-- 1. 직원 테이블에서 사번, 이름, 급여를 검색. 사번 오름차순 정렬.
+select empno, ename, sal
+from emp
+order by empno;
+
+-- 2. 직원 테이블에서 사번, 이름, 급여를 검색. 급여 내림차순 정렬.
+select empno, ename, sal from emp order by sal desc;
+
+-- 3. 직원 테이블에서 부서번호, 사번, 이름을 검색.
+-- 정렬 순서: (1) 부서번호 오름차순, (2) 사번 오름차순
+select deptno, empno, ename
+from emp
+order by deptno, empno;
+
+-- 4. 직원 테이블에서 부서번호, 사번, 이름, 급여를 검색.
+-- 정렬 순서: (1) 부서번호 오름차순, (2) 급여 내림차순
+select deptno, empno, ename, sal
+from emp
+order by deptno, sal desc;
+
+
+-- 중복되지 않는 결과 출력:
+select job from emp; --> 14개 행(record)
+select distinct job from emp; --> 5개 행
+select distinct job from emp order by job;
+
+-- 중복되지 않는 부서번호, 업무 출력. (1)부서번호 오름차순, (2) 업무 오름차순.
+select distinct deptno, job
+from emp
+order by deptno, job;
