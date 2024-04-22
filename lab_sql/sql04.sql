@@ -24,6 +24,16 @@ from emp;
 select comm, nvl(comm, 0), nvl2(comm, comm, 0), nvl2(comm, 'T', 'F')
 from emp;
 
+-- 이름이 (대/소문자 구분없이) 'a'로 시작하는 직원들의 이름
+-- ALLEN, Allen, allen
+select ename from emp
+where lower(ename) like 'a%';
+
+-- 사번, 이름, 급여, 수당, 연봉을 검색.
+-- 연봉 = 급여 * 12 + 수당.
+select empno, ename, sal, comm, sal * 12 + nvl(comm, 0) as "연봉"
+from emp;
+
 
 -- 다중 행 함수 예:
 -- count(컬럼): null이 아닌 행의 개수를 리턴.
@@ -33,4 +43,13 @@ from emp;
 -- 테이블의 행의 개수
 select count(*) from emp;
 
+-- 통계 함수: 합계, 평균, 최댓값, 최솟값, 분산, 표준편차
+select sum(sal), avg(sal), max(sal), min(sal), variance(sal), stddev(sal)
+from emp;
 
+select sum(comm), avg(comm) from emp;
+--> 모든 통계 함수들은 null을 제외하고 계산을 함.
+
+-- 단일 행 함수와 다중 행 함수는 함께 사용할 수 없음.
+-- select sal, sum(sal) from emp;
+-- select nvl(comm, 0), sum(comm) from emp;
