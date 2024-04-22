@@ -111,3 +111,32 @@ order by hiredate;
 --> 암묵적(자동) 타입 변환:
 -- 오라클은 hiredate 컬럼(date 타입)과 문자열 '1987/01/01'의 크기를 비교할 때
 -- 날짜 타입을 문자열로 변환한 후 문자열의 크기 비교를 수행함.
+
+select * from emp
+where hiredate > to_date('1987/01/01')
+order by hiredate;
+--> 명시적 타입 변환:
+-- to_date('문자열'): '문자열'을 날짜(date) 타입으로 변환.
+
+
+-- like 검색: 특정 문자열로 시작하거나, 특정 문자열이 포함된 값을 찾는 검색.
+-- 이름이 'A'로 시작하는 직원들의 모든 정보:
+select * from emp
+where ename like 'A%';
+
+-- like 검색에서 사용하는 wildcard:
+-- (1) %: 글자 수 제한 없음.
+-- (2) _(underscore, 밑줄): 밑줄이 있는 자리에 어떤 문자가 있어도 됨.
+select * from emp
+where job like '_LERK';
+
+-- 이름에 'A'가 포함된 직원들의 모든 정보:
+select * from emp
+where ename like '%A%';
+
+-- 30번 부서에 근무하고, 업무이름에 'SALES'가 포함되어 있는 직원들의
+-- 사번, 부서번호, 이름, 업무, 급여, 수당을 출력. 사번 오름차순 정렬.
+select empno, deptno, ename, job, sal, comm
+from emp
+where deptno = 30 and job like '%SALES%'
+order by empno;
