@@ -39,3 +39,14 @@ from dept;
 -- 직원 테이블을 검색해서 'A의 급여는 B' 형식으로 출력:
 select ename || '의 급여는 ' || sal as "직원 급여"
 from emp;
+
+-- 검색 결과를 정렬해서 출력:
+-- select 컬럼, ... from 테이블 order by 컬럼 [asc/desc];
+-- asc: 오름차순 정렬(ascending order). 기본값. asc 생략 가능.
+-- desc: 내림차순 정렬(descending order).
+
+-- 부서 테이블에서 부서 이름을 오름차순 정렬 출력
+select deptno, dname from dept order by dname;
+
+-- 부서 테이블에서 부서 이름을 내림차순 정렬 출력
+select deptno, dname from dept order by dname desc;
