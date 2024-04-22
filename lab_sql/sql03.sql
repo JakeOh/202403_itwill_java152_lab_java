@@ -60,3 +60,52 @@ select deptno, ename, sal
 from emp
 where deptno in (10, 20)
 order by deptno;
+
+-- 직원 테이블에서 업무가 'CLERK'인  직원들의
+-- 업무, 이름, 급여를 출력. 정렬 순서: 이름.
+select job, ename, sal
+from emp
+where job = 'CLERK'
+order by ename;
+--> SQL에서는 문자열을 비교할 때 =, != 연산자를 사용.
+--> SQL에서 문자열을 작은따옴표('')를 사용. 대/소문자를 구분.
+
+-- 직원 테이블에서 업무가 'CLERK' 또는 'MANAGER'인  직원들의
+-- 업무, 이름, 급여를 검색. 정렬 순서: (1) 업무, (2) 급여.
+select job, ename, sal
+from emp
+where job = 'CLERK' or job = 'MANAGER'
+order by job, sal;
+--> where job = 'CLERK' or 'MANAGER' (X)
+
+select job, ename, sal
+from emp
+where job in ('CLERK', 'MANAGER')
+order by job, sal;
+
+-- 직원 테이블에서 20번 부서에서 근무하는 CLERK의 
+-- 모든 정보(컬럼)을 검색.
+select * from emp
+where deptno = 20 and job = 'CLERK';
+
+-- 직원 테이블에서 CLERK, ANALYST, MANAGER가 아닌  직원들의
+-- 사번, 이름, 업무, 급여를 검색. 정렬 순서: 사번.
+select empno, ename, job, sal
+from emp
+where job != 'CLERK' and job != 'ANALYST' and job != 'MANAGER'
+order by empno;
+
+select empno, ename, job, sal
+from emp
+where job not in ('CLERK', 'ANALYST', 'MANAGER')
+order by empno;
+
+-- 숫자 타입 뿐만 아니라, 문자열과 날짜 타입도 대소비교가 가능.
+-- (예) 'a' < 'b', 2024/04/21 < 2024/04/22
+
+-- '1987/01/01' 이후에 입사한 직원들의 모든 정보(컬럼)을 출력.
+-- 정렬 순서: 입사일 오름차순.
+select * from emp
+where hiredate > '1987/01/01'
+order by hiredate;
+--> 날짜 타입을 비교할 때, '1987/01/01' 문자열 타입이 날짜 타입으로 변환.
