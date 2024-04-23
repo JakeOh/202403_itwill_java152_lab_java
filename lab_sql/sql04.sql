@@ -107,5 +107,31 @@ group by to_char(hiredate, 'YYYY')
 order by YEAR;
 
 -- Ex. 부서별 급여 평균 검색. 급여 평균이 2000 이상인 부서만 검색.
+select deptno, round(avg(sal), 2) as AVG_SAL
+from emp
+group by deptno
+having avg(sal) >= 2000
+order by deptno;
+
 -- Ex. mgr 컬럼이 null이 아닌 직원들 중에서 부서별 급여 평균을 검색.
 --     정렬순서: 부서번호 오름차순.
+select deptno, round(avg(sal), 2) as AVG_SAL
+from emp
+where mgr is not null
+group by deptno
+order by deptno;
+
+-- PRESIDENT는 제외하고, 업무별 사원수를 검색.
+-- 업무별 사원수가 3명 이상인 업무들만 검색. 업무이름 오름차순 정렬.
+select job, count(*) as COUNT
+from emp
+where job != 'PRESIDENT'
+group by job
+having count(*) >= 3
+order by job;
+
+select job, count(*) as COUNT
+from emp
+group by job
+having job != 'PRESIDENT' and count(*) >= 3
+order by job;
