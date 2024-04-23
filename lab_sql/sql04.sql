@@ -135,3 +135,19 @@ from emp
 group by job
 having job != 'PRESIDENT' and count(*) >= 3
 order by job;
+
+-- 입사연도별, 부서별 사원수 검색. 1980년은 검색에서 제외.
+-- 연도별, 부서별 사원수가 2명 이상인 경우만 출력.
+-- 정렬 순서: (1) 연도, (2) 부서.
+select to_char(hiredate, 'YYYY') as YEAR, deptno, count(*) as COUNT
+from emp
+where to_char(hiredate, 'YYYY') != '1980'
+group by to_char(hiredate, 'YYYY'), deptno
+having count(*) >= 2
+order by YEAR, deptno;
+
+select to_char(hiredate, 'YYYY') as YEAR, deptno, count(*) as COUNT
+from emp
+group by to_char(hiredate, 'YYYY'), deptno
+having to_char(hiredate, 'YYYY') != '1980' and count(*) >= 2
+order by YEAR, deptno;
