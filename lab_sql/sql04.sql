@@ -84,9 +84,28 @@ order by deptno;
 
 -- 모든 문제에서 소수점은 반올림해서 소수점 이하 2자리까지 표시.
 -- Ex. 업무별 업무, 직원수, 급여 최댓값, 최솟값, 평균을 업무 오름차순으로 출력.
+select job, count(job) AS COUNT, 
+    max(sal) as MAX_SAL, min(sal) as MIN_SAL, 
+    round(avg(sal), 2) as AVG_SAL
+from emp
+group by job
+order by job;
+
 -- Ex. 부서별/업무별로 부서번호, 업무, 직원수, 급여 평균을 검색.
 --     정렬 순서: (1) 부서번호 (2) 업무
+select deptno, job, 
+    count(*) as COUNT, round(avg(sal), 2) as AVG_SAL
+from emp
+group by deptno, job
+order by deptno, job;
+
 -- Ex. 입사연도별 사원수를 검색. (힌트) to_char(날짜, 포맷) 이용.
+select to_char(hiredate, 'YYYY') from emp;
+select to_char(hiredate, 'YYYY') as YEAR, count(*) as COUNT
+from emp
+group by to_char(hiredate, 'YYYY')
+order by YEAR;
+
 -- Ex. 부서별 급여 평균 검색. 급여 평균이 2000 이상인 부서만 검색.
 -- Ex. mgr 컬럼이 null이 아닌 직원들 중에서 부서별 급여 평균을 검색.
 --     정렬순서: 부서번호 오름차순.
