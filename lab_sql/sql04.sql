@@ -53,3 +53,40 @@ select sum(comm), avg(comm) from emp;
 -- 단일 행 함수와 다중 행 함수는 함께 사용할 수 없음.
 -- select sal, sum(sal) from emp;
 -- select nvl(comm, 0), sum(comm) from emp;
+
+/*
+ * 그룹별 쿼리(query):
+ * (예) 부서별 직원수, 부서별 급여 평균, ...
+ * (문법)
+ * select 컬럼, 함수호출, ...
+ * from 테이블
+ * where 조건식(1)
+ * group by 컬럼(그룹을 묶을 수 있는 변수)
+ * having 조건식(2)
+ * order by 컬럼(정렬 기준), ...;
+ *
+ * 조건식(1): 그룹으로 묶기 전에 행들을 선택할 조건.
+ * 조건식(2): 그룹으로 묶은 후에 행들을 선택할 조건.
+ */
+
+-- 부서별 급여 평균
+select deptno, round(avg(sal), 2) as AVG_SAL
+from emp
+group by deptno
+order by deptno;
+
+-- 부서별 급여 평균, 표준편차
+select deptno, round(avg(sal), 2) as AVG_SAL,
+    round(stddev(sal), 2) as STD_SAL
+from emp
+group by deptno
+order by deptno;
+
+-- 모든 문제에서 소수점은 반올림해서 소수점 이하 2자리까지 표시.
+-- Ex. 업무별 업무, 직원수, 급여 최댓값, 최솟값, 평균을 업무 오름차순으로 출력.
+-- Ex. 부서별/업무별로 부서번호, 업무, 직원수, 급여 평균을 검색.
+--     정렬 순서: (1) 부서번호 (2) 업무
+-- Ex. 입사연도별 사원수를 검색. (힌트) to_char(날짜, 포맷) 이용.
+-- Ex. 부서별 급여 평균 검색. 급여 평균이 2000 이상인 부서만 검색.
+-- Ex. mgr 컬럼이 null이 아닌 직원들 중에서 부서별 급여 평균을 검색.
+--     정렬순서: 부서번호 오름차순.
