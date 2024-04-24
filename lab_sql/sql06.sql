@@ -56,3 +56,20 @@ from emp e
 select e.empno, e.ename, d.deptno, d.dname
 from emp e, dept d
 where e.deptno(+) = d.deptno;
+
+-- full (outer) join. 표준문법.
+select e.empno, e.ename, e.deptno, d.deptno, d.dname
+from emp e
+    full join dept d on e.deptno = d.deptno;
+--> full outer join에서 outer는 생략 가능.
+
+-- Oracle은 full outer join 문법을 제공하지 않음.
+-- 집합 연산(합집합 union, 교집합 intersection, 차집합)을 사용.
+select e.empno, e.ename, e.deptno, d.deptno, d.dname
+from emp e, dept d
+where e.deptno = d.deptno(+)
+union
+select e.empno, e.ename, e.deptno, d.deptno, d.dname
+from emp e, dept d
+where e.deptno(+) = d.deptno;
+
