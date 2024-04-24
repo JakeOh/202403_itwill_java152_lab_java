@@ -73,3 +73,32 @@ select e.empno, e.ename, e.deptno, d.deptno, d.dname
 from emp e, dept d
 where e.deptno(+) = d.deptno;
 
+-- equi join: join의 조건식이 = 연산자를 사용해서 만들어진 경우.
+-- non-equi join: join의 조건식이 부등호를 사용해서 만들어진 경우.
+-- 사번, 이름, 급여, 급여등급(호봉) 검색.
+select e.empno, e.ename, e.sal, s.grade
+from emp e
+    join salgrade s on e.sal between s.losal and s.hisal;
+-- join salgrade s on e.sal >= s.losal and e.sal <= s.hisal;
+
+select e.empno, e.ename, e.sal, s.grade
+from emp e, salgrade s
+where e.sal between s.losal and s.hisal;
+
+-- self join: 같은 테이블에서 join하는 것.
+-- 사번, 이름, 매니저 사번, 매니저 이름을 검색.
+select e1.empno, e1.ename, e1.mgr as MGR_NO, e2.ename as MGR_NAME
+from emp e1
+    join emp e2 on e1.mgr = e2.empno;
+
+select e1.empno, e1.ename, e1.mgr, e2.ename as MGR_NAME
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+
+select e1.empno, e1.ename, e1.mgr, e2.ename as MGR_NAME
+from emp e1
+    left join emp e2 on e1.mgr = e2.empno;
+
+select e1.empno, e1.ename, e1.mgr, e2.ename as MGR_NAME
+from emp e1, emp e2
+where e1.mgr = e2.empno(+);
