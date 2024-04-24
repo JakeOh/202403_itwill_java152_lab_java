@@ -131,6 +131,14 @@ where e1.mgr = e2.empno
     e1.sal between s.losal and s.hisal
 order by e2.ename, s.grade;
 
+-----
+select e1.*, e2.*, s.*
+from emp e1
+    left join emp e2 on e1.mgr = e2.empno
+    join salgrade s on e1.sal between s.losal and s.hisal
+;
+-----
+
 -- ex3. 직원 이름, 부서 이름, 급여, 급여 등급을 검색.
 --      정렬 순서: (1)부서 이름, (2)급여 등급
 select e.ename, d.dname, e.sal, s.grade
@@ -147,9 +155,17 @@ where e.deptno = d.deptno
 order by d.dname, s.grade;
 
 -- ex4. 부서 이름, 부서 위치, 부서의 직원수를 검색. 부서 번호 오름 차순.
-select d.dname, d.loc, count(*)
+-----
+select d.deptno, d.dname, d.loc
 from emp e
-    join dept d on e.deptno = d.deptno
+    right join dept d on e.deptno = d.deptno
+group by d.deptno, d.dname, d.loc
+;
+-----
+
+select d.dname, d.loc, count(e.deptno)
+from emp e
+    right join dept d on e.deptno = d.deptno
 group by d.deptno, d.dname, d.loc
 order by d.deptno;
 
