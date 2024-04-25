@@ -89,3 +89,31 @@ insert into ex_test_default (tno) values (1234);
 
 select * from ex_test_default;
 commit;
+
+/*
+ * 테이블을 생성할 때 제약조건(constraint) 만들기:
+ * (1) primary key(PK, 고유키)
+ * (2) not null(NN)
+ * (3) unique
+ * (4) check
+ * (5) foreign key(FK, 외래키)
+ */
+
+-- 테이블 생성할 때 제약조건 만들기 1: 제약조건 이름 설정하지 않기.
+create table ex_emp1 (
+    eno     number(4) primary key, -- 사번. 고유키.
+    ename   varchar2(10) not null, -- 이름.
+    email   varchar2(100) unique, -- 이메일
+    age     number(3) check (age >= 0),
+    memo    varchar2(1000)
+);
+
+insert into ex_emp1
+values (1001, '홍길동', 'hdg@itiwll.com', 16, '안녕하세요');
+
+insert into ex_emp1 (eno, ename) values (1002, '허균');
+--> 성공
+insert into ex_emp1 (eno, ename) values (1002, 'abc');
+--> 실패: PK 제약조건 위배
+
+select * from ex_emp1;
