@@ -69,7 +69,50 @@ where empno = 1004;
 select * from emp where empno = 1004;
 
 -- 'ACCOUNTING' 부서에서 일하는 직원들의 급여를 10% 인상:
+update emp
+set sal = sal * 1.1
+where deptno = (
+    select deptno from dept where dname = 'ACCOUNTING'
+);
+
+select * from emp
+where deptno = (
+    select deptno from dept where dname = 'ACCOUNTING'
+);
 
 -- salgrade가 1인 직원들의 급여를 25% 인상:
+select losal, hisal from salgrade where grade = 1;
+
+update emp
+set sal = sal * 1.25
+where sal between 
+    (select losal from salgrade where grade = 1)
+    and 
+    (select hisal from salgrade where grade = 1);
+
+select * from emp
+where sal between 
+    (select losal from salgrade where grade = 1)
+    and 
+    (select hisal from salgrade where grade = 1);
 
 
+-- delete 문: 테이블에서 행 삭제(DML)
+-- delete from 테이블 [where 조건식];
+-- where 조건식을 쓰지 않으면 테이블의 모든 행이 삭제됨!
+
+-- emp 테이블에서 사번 1004인 직원 정보를 삭제:
+delete from emp where empno = 1004;
+
+select * from emp;
+commit;
+
+delete from emp; --> 모든 행 삭제
+rollback;
+
+-- emp 테이블에서 1987년에 입사한 사원들을 삭제:
+delete from emp where to_char(hiredate, 'YYYY') = '1987';
+
+select * from emp order by hiredate desc;
+
+commit;
