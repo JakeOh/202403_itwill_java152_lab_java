@@ -38,4 +38,16 @@ alter table students add department number(2);
 alter table students drop constraint students_pk;
 
 -- (2) 컬럼 삭제
+alter table students drop column department;
+describe students;
 
+
+-- 수정(modify); 컬럼 정의(데이터 타입, 기본값, null 여부)를 수정.
+-- students 테이블의 stuname 컬럼의 데이터 타입을 
+-- varchar2(4 char)에서 varchar2(40 char)로 변경 & NN 추가.
+alter table students modify stuname varchar2(40 char) not null;
+describe students;
+
+-- modify는 제약조건의 내용을 변경하지 못함.
+-- 제약조건 삭제(alter table ... drop constraint ...) 
+--> 제약조건 추가(alter table ... add constraint ...)
