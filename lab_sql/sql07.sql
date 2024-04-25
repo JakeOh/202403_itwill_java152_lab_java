@@ -116,4 +116,58 @@ insert into ex_emp1 (eno, ename) values (1002, '허균');
 insert into ex_emp1 (eno, ename) values (1002, 'abc');
 --> 실패: PK 제약조건 위배
 
+insert into ex_emp1 (eno) values (1003);
+--> NN 제약조건 위배
+
+insert into ex_emp1 (eno, ename, email)
+values (1003, 'John Doe', 'hdg@itwill.com');
+
+insert into ex_emp1 (eno, ename, email)
+values (1004, 'John Doe', 'hdg@itwill.com');
+--> unique 제약조건 위배
+
+insert into ex_emp1 (eno, ename, age)
+values (1005, 'Scott', -1);
+--> check (age >= 0) 제약 조건 위배
+
 select * from ex_emp1;
+commit;
+
+-- 제약조건 만들기 2: 제약조건 이름 설정
+create table ex_emp2 (
+    id      number(4) 
+            constraint ex_emp2_pk_id primary key,
+    ename   varchar2(10)
+            constraint ex_emp2_nn_ename not null,
+    email   varchar2(100) 
+            constraint ex_emp2_uq_email unique,
+    age     number(3) 
+            constraint ex_emp2_ck_age check (age >= 0),
+    memo    varchar2(1000)
+);
+
+insert into ex_emp2 (id, ename) values (1, '홍길동');
+
+insert into ex_emp2 (id, ename) values (1, '오쌤'); --> PK 위배
+
+select * from ex_emp2;
+commit;
+
+-- 제약조건 만들기 3: 컬럼 정의(데이터 타입 선언) 따로, 제약조건 정의 따로.
+create table ex_emp3 (
+    -- 컬럼 정의: 컬럼 이름 & 데이터 타입
+    id      number(4),
+    ename   varchar2(10),
+    email   varchar2(100),
+    age     number(3),
+    memo    varchar2(1000),
+    -- 제약 조건 정의
+    constraint ex_emp3_pk_id primary key (id),
+    constraint ex_emp3_nn_ename check (ename is not null), -- 주의!
+    constraint ex_emp3_uq_email unique (email),
+    constraint ex_emp3_ck_age check (age >= 0)
+);
+
+insert into ex_emp3 (id) values (1234);
+--> check(not null) 위배
+
