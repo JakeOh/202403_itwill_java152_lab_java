@@ -36,4 +36,40 @@ select * from ex_emp6;
 insert into ex_emp6
 select * from emp where deptno = 10;
 
+-- emp 테이블에서 수당(comm)이 null 아닌 행들을 bonus 테이블에 삽입:
+insert into bonus
+select ename, job, sal, comm from emp where comm is not null;
+
+select * from bonus;
+
 commit;
+
+
+-- update 문: 테이블 데이터 업데이트(수정)
+-- update 테이블 set 변수 = 값, ... where 조건식;
+select * from emp;
+
+-- emp 테이블에서 사번이 1004인 직원의 급여를 6000으로 변경:
+update emp set sal = 6000 where empno = 1004;
+
+-- where 조건식이 없으면 update 문장은 테이블의 모든 행의 값을 업데이트함.
+commit; -- 현재까지 모든 변경 내용을 영구 저장.
+
+update emp set sal = 6000;
+select * from emp;
+
+rollback; -- 직전의 commit 상태로 되돌림.
+select * from emp;
+
+-- 사번이 1004인 직원의 업무를 'MANAGER', 입사날짜를 '2024/04/25'로 변경
+update emp
+set job = 'MANAGER', hiredate = '2024/04/25'
+where empno = 1004;
+
+select * from emp where empno = 1004;
+
+-- 'ACCOUNTING' 부서에서 일하는 직원들의 급여를 10% 인상:
+
+-- salgrade가 1인 직원들의 급여를 25% 인상:
+
+
