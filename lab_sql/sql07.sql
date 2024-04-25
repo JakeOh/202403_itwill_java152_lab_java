@@ -171,3 +171,59 @@ create table ex_emp3 (
 insert into ex_emp3 (id) values (1234);
 --> check(not null) 위배
 
+-- FK(Foreign Key, 외래키): 다른 테이블의 PK를 참조하는 제약조건.
+-- 데이터를 insert할 때, 다른 테이블의 PK에 없는 값이 삽입되지 않도록.
+-- 테이블을 만들 때 FK를 설정하려면, PK가 설정된 다른 테이블이 먼저 생성되어 있어야 함.
+
+create table ex_dept (
+    deptno  number(2)
+            constraint ex_dept_pk_deptno primary key,
+    dname   varchar(10)
+            constraint ex_dept_nn_dname not null
+);
+
+create table ex_emp4 (
+    empno   number(4)
+            constraint ex_emp4_pk_empno primary key,
+    ename   varchar2(10)
+            constraint ex_emp4_nn_ename not null,
+    deptno  number(2)
+            constraint ex_emp4_fk_deptno references ex_dept (deptno)
+);
+
+insert into ex_emp4 values (1200, '오쌤', 10);
+--> 10번 부서가 ex_dept 테이블에 없는 경우에는 insert 실패! FK 위배.
+--> 10번 부서가 ex_dept 테이블에 있는 경우에는 insert 성공!
+
+insert into ex_dept values(10, '개발1팀');
+
+insert into ex_emp4 (empno, ename) values (1300, '홍길동');
+--> FK 제약조건이 있는 컬럼에는 null 삽입될 수도 있음.
+
+insert into ex_emp4 values (1400, 'Jake', 10);
+--> FK 제약조건이 있는 컬럼에는 중복된 값이 삽입될 수도 있음.
+
+select * from ex_dept;
+select * from ex_emp4;
+
+-- 컬럼 정의 따로, FK 제약조건 설정 따로
+create table ex_emp5 (
+    -- 컬럼 정의:
+    empno   number(4),
+    ename   varchar2(10),
+    deptno  number(2),
+    -- 제약조건 정의:
+    constraint ex_emp5_pk_empno primary key (empno),
+    constraint ex_emp5_nn_ename check (ename is not null),
+    constraint ex_emp5_fk_deptno foreign key (deptno) 
+            references ex_dept (deptno)
+);
+
+
+-- 오라클은 테이블들을 관리하기 위한 테이블을 가지고 있음.
+select * from user_tables;
+select table_name from user_tables;
+
+-- 오라클은 제약조건들을 관리하기 위한 테이블을 가지고 있음.
+select * from user_constraints;
+select constraint_name from user_constraints;
