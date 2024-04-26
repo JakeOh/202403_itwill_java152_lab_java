@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 public class Blog {
     
     public static final class Entity {
+        // 데이터베이스 테이블 이름을 상수로 선언. 
+        public static final String TBL_BLOGS = "BLOGS";
+
         // 데이터베이스 BLOGS 테이블의 컬럼 이름들을 상수로 선언.
         public static final String COL_ID = "ID";
         public static final String COL_TITLE = "TITLE";
