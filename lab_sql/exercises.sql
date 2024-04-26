@@ -125,6 +125,15 @@ where AVG_SAL = (
     select max(AVG_SAL) from t
 );
 
+-- (3) 다중행 서브쿼리
+select department_id, round(avg(salary), 1)
+from employees
+group by department_id
+having avg(salary) >= ALL (
+    select avg(salary) from employees
+    group by department_id
+);
+
 -- 11. 사번, 직원이름, 국가이름, 급여 검색.
 select e.employee_id, e.first_name, e.last_name, c.country_name, e.salary
 from employees e
