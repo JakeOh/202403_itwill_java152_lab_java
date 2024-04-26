@@ -1,10 +1,16 @@
 package com.itwill.jdbc01;
 
 import static com.itwill.jdbc.OracleJdbc.*;
+import static com.itwill.jdbc.model.Blog.Entity.*;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+
+import com.itwill.jdbc.model.Blog;
 
 import oracle.jdbc.OracleDriver;
 
@@ -42,7 +48,32 @@ public class JdbcMain01 {
         Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
         System.out.println("오라클 접속 성공");
         
-        // 8. DB 관련 리소스 해제.
+        // 5. Statement 타입 객체 생성
+        final String sql = "select * from blogs order by id desc";
+        //-> Statement 객체에서 사용하는 SQL 문장은 세미콜론(;)을 사용하지 않음!
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        
+        // 6-7. SQL 문장 실행 & 결과 처리
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) { // ResultSet(테이블)에서 다음 행(row)이 있는 지 검사
+            // 그 행의 컬럼들에 있는 값을 읽음:
+            int id = rs.getInt(COL_ID); // 테이블의 ID 컬럼 값을 읽음.
+            String title = rs.getString(COL_TITLE); // 테이블의 TITLE 컬럼 값을 읽음.
+            String content = rs.getString(COL_CONTENT);
+            String writer = rs.getString(COL_WRITER);
+            LocalDateTime createdTime = rs.getTimestamp(COL_CREATED_TIME)
+                    .toLocalDateTime();
+            LocalDateTime modifiedTime = rs.getTimestamp(COL_MODIFIED_TIME)
+                    .toLocalDateTime();
+            
+            Blog blog = new Blog(id, title, content, writer, createdTime, modifiedTime);
+            System.out.println(blog);
+        }
+        
+        // 8. DB 관련 리소스(Connection, Statement, ResultSet) 해제.
+        // 리소스를 해제할 때는 리소스가 생성된 순서의 반대로!
+        rs.close(); // ResultSet 해제.
+        stmt.close(); // Statement 해제.
         conn.close(); // 오라클 접속 끊기.
         System.out.println("오라클 접속 해제");
     }
