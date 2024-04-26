@@ -1,5 +1,13 @@
 package com.itwill.jdbc01;
 
+import static com.itwill.jdbc.OracleJdbc.*;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import oracle.jdbc.OracleDriver;
+
 /*
  * JDBC(Java Database Connectivity):
  * 자바 프로그램에서 데이터베이스를 연결하고, SQL 문장들을 실행해서 그 결과를 처리.
@@ -10,13 +18,33 @@ package com.itwill.jdbc01;
  *       ---> ojdbc11-23.3.0.x.x.jar
  *   (2) 이클립스 프로젝트에 lib 폴더를 만들고, jar 파일을 복사.
  *   (3) jar 파일 오른쪽 클릭 --> Build Path --> Add to build path
+ * 2. 데이터베이스에 접속하기 위한 정보들(URL, USER, PASSWORD, ...)을 상수로 정의
+ * 3. 프로그램에서 오라클 JDBC 라이브러리를 메모리에 로딩(등록).
+ * 4. 오라클 데이터베이스에 접속.
+ * 5. Statement 타입의 객체 생성 - DB에서 실행할 SQL 문장을 작성하고 실행할 수 있는 객체
+ * 6. Statement 타입 인스턴스에서 메서드를 호출해서 SQL 문자을 실행.
+ *   (1) executeQuery(): DQL(select 문장)
+ *   (2) executeUpdate(): DML(insert, update, delete 문장)
+ * 7. 메서드 실행 결과(리턴 값)을 처리.
+ * 8. 사용했었던 모든 리소스들을 해제(close() 메서드 호출).
  */
 
 public class JdbcMain01 {
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
+    public static void main(String[] args) throws SQLException {
+        // select 문장 실행 & 결과 출력.
 
+        // 3. 오라클 JDBC 라이브러리를 사용할 수 있도록 등록.
+        DriverManager.registerDriver(new OracleDriver());
+        System.out.println("오라클 드라이버 등록 성공");
+        
+        // 4. 오라클 데이터베이스에 접속(오라클 세션 생성)
+        Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+        System.out.println("오라클 접속 성공");
+        
+        // 8. DB 관련 리소스 해제.
+        conn.close(); // 오라클 접속 끊기.
+        System.out.println("오라클 접속 해제");
     }
 
 }
