@@ -28,7 +28,7 @@ public class JdbcMain04 {
             System.out.println(sql); // 실행할 SQL 문장
             
             stmt = conn.prepareStatement(sql); // Statement 객체 생성
-            stmt.setInt(1, 10); // PreparedStatement의 ?를 정수 10으로 설정
+            stmt.setInt(1, 11); // PreparedStatement의 ?를 정수 11으로 설정
             
             int result = stmt.executeUpdate(); // SQL 실행
             System.out.println(result + "개 행이 삭제됨."); // 실행 결과 출력
