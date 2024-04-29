@@ -262,4 +262,69 @@ public class BlogDao {
         return result;
     }
 
+    // 아이디(PK)로 검색하기:
+    private static final String SQL_SELECT_BY_ID = String.format(
+            "select * from %s where %s = ?", 
+            TBL_BLOGS, COL_ID);
+    
+    /**
+     * BLOGS 테이블의 고유키 id를 전달받아서, 해당 Blog 객체를 리턴.
+     * @param id 검색하기 위한 고유키.
+     * @return 테이블에서 검색한 Blog 객체. 고유키에 해당하는 행이 없는 경우 null을 리턴.
+     */
+    public Blog read(int id) {
+        Blog blog = null;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SQL_SELECT_BY_ID);
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                blog = makeBlogFromResultSet(rs);
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt, rs);
+        }
+        
+        return blog;
+    }
+    
+    private static final String SQL_UPDATE = String.format(
+            "update %s set %s = ?, %s = ?, %s = systimestamp where %s = ?", 
+            TBL_BLOGS, COL_TITLE, COL_CONTENT, COL_MODIFIED_TIME, COL_ID);
+    
+    /**
+     * BLOGS 테이블 업데이트.
+     * @param blog 업데이트할 id(고유키), 제목, 내용을 가지고 있는 객체.
+     * @return 업데이트한 행의 개수.
+     */
+    public int update(Blog blog) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SQL_UPDATE);
+            stmt.setString(1, blog.getTitle());
+            stmt.setString(2, blog.getContent());
+            stmt.setInt(3, blog.getId());
+            result = stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
+
 }
