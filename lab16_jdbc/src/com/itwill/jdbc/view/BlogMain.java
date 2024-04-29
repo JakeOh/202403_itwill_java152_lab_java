@@ -19,6 +19,8 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BlogMain {
     private static final String[] SEARCH_TYPES  = { 
@@ -104,6 +106,13 @@ public class BlogMain {
         buttonPanel.add(btnReadAll);
         
         btnCreate = new JButton("새 블로그");
+        btnCreate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 새 블로그 작성 창 띄우기
+                BlogCreateFrame.showBlogCreateFrame(frame);
+            }
+        });
         btnCreate.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnCreate);
         
