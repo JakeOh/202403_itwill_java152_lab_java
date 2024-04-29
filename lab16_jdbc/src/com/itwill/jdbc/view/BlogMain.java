@@ -9,7 +9,11 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.itwill.jdbc.controller.BlogDao;
+import com.itwill.jdbc.model.Blog;
+
 import java.awt.Font;
+import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -37,6 +41,8 @@ public class BlogMain {
     private JScrollPane scrollPane;
     private JTable table;
     private DefaultTableModel tableModel;
+    
+    private BlogDao dao = BlogDao.getInstance();
 
     /**
      * Launch the application.
@@ -59,6 +65,7 @@ public class BlogMain {
      */
     public BlogMain() {
         initialize();
+        initializeTable();
     }
 
     /**
@@ -117,4 +124,21 @@ public class BlogMain {
         scrollPane.setViewportView(table);
     }
 
+    private void initializeTable() {
+        // DAO를 사용해서 DB 테이블에서 검색.
+        List<Blog> blogs = dao.read();
+        
+        // 검색한 내용을 JTable에 보여줌 - JTable의 테이블 모델을 재설정.
+        tableModel = new DefaultTableModel(null, COLUMN_NAMES); // 테이블 모델 리셋.
+        for (Blog b : blogs) {
+            // DB 테이블에서 검색한 레코드를 JTable에서 사용할 행 데이터로 변환.
+            Object[] row = {
+                    b.getId(), b.getTitle(),
+                    b.getWriter(), b.getModifiedTime(),
+            };
+            tableModel.addRow(row); // 테이블 모델에 행 데이터를 추가.
+        }
+        table.setModel(tableModel); // JTable의 모델을 다시 세팅.
+    }
+    
 }
