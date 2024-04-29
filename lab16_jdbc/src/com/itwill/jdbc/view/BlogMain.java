@@ -98,6 +98,7 @@ public class BlogMain implements CreateNotify {
         textSearchKeyword.setColumns(10);
         
         btnSearch = new JButton("검색");
+        btnSearch.addActionListener((e) -> search());
         btnSearch.setFont(new Font("D2Coding", Font.PLAIN, 28));
         searchPanel.add(btnSearch);
         
@@ -105,6 +106,7 @@ public class BlogMain implements CreateNotify {
         frame.getContentPane().add(buttonPanel, BorderLayout.SOUTH);
         
         btnReadAll = new JButton("목록보기");
+        btnReadAll.addActionListener((e) -> initializeTable());
         btnReadAll.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnReadAll);
         
@@ -136,11 +138,32 @@ public class BlogMain implements CreateNotify {
         table.setModel(tableModel);
         scrollPane.setViewportView(table);
     }
+    
+    private void search() {
+        int type = comboBox.getSelectedIndex(); // 콤보박스에서 선택된 아이템의 인덱스
+        String keyword = textSearchKeyword.getText(); // 검색어
+        if (keyword.equals("")) {
+            JOptionPane.showMessageDialog(frame, 
+                    "검색어를 입력하세요.", 
+                    "경고", JOptionPane.WARNING_MESSAGE);
+            textSearchKeyword.requestFocus();
+            //-> 검색어 입력 JTextField에 포커스를 줌(커서 깜박깜박). 
+            
+            return;
+        }
+        
+        // DAO 메서드를 호출해서 검색 결과를 가져옴.
+        List<Blog> blogs = dao.search(type, keyword);
+        resetTable(blogs); // 테이블 리셋.
+    }
 
     private void initializeTable() {
         // DAO를 사용해서 DB 테이블에서 검색.
         List<Blog> blogs = dao.read();
-        
+        resetTable(blogs); // 테이블 리셋
+    }
+    
+    private void resetTable(List<Blog> blogs) {
         // 검색한 내용을 JTable에 보여줌 - JTable의 테이블 모델을 재설정.
         tableModel = new DefaultTableModel(null, COLUMN_NAMES); // 테이블 모델 리셋.
         for (Blog b : blogs) {
