@@ -124,6 +124,7 @@ public class BlogMain implements CreateNotify {
         buttonPanel.add(btnDetails);
         
         btnDelete = new JButton("삭제");
+        btnDelete.addActionListener((e) -> deleteBlog());
         btnDelete.setFont(new Font("D2Coding", Font.PLAIN, 28));
         buttonPanel.add(btnDelete);
         
@@ -152,7 +153,38 @@ public class BlogMain implements CreateNotify {
         }
         table.setModel(tableModel); // JTable의 모델을 다시 세팅.
     }
-
+    
+    private void deleteBlog() {
+        int index = table.getSelectedRow(); // 테이블에서 선택된 행의 인덱스
+        if (index == -1) { // JTable에서 선택된 행이 없을 때
+            JOptionPane.showMessageDialog(
+                    frame, 
+                    "삭제할 행을 먼저 선택하세요.", 
+                    "경고", 
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(
+                frame, 
+                "정말 삭제할까요?", 
+                "삭제 확인", 
+                JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            // 선택된 행에서 블로그 번호(id)를 읽음.
+            Integer id = (Integer) tableModel.getValueAt(index, 0);
+            // DAO의 delete 메서드 호출.
+            int result = dao.delete(id);
+            if (result == 1) {
+                initializeTable(); // 테이블을 새로고침.
+                JOptionPane.showMessageDialog(frame, "삭제 성공!");
+            } else {
+                JOptionPane.showMessageDialog(frame, "삭제 실패!");
+            }
+        }
+        
+    }
+    
     @Override
     public void notifyCreateSuccess() {
         // 테이블에 insert 성공했을 때 BlogCreateFrame이 호출하는 메서드.

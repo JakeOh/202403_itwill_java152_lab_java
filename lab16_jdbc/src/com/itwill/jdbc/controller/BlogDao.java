@@ -147,5 +147,35 @@ public class BlogDao {
         
         return result;
     }
+    
+    // delete(int id) 메서드에서 사용할 SQL: delete from blogs where id = ?
+    private static final String SQL_DELETE = String.format(
+            "delete from %s where %s = ?", 
+            TBL_BLOGS, COL_ID);
+    
+    /**
+     * 테이블 BLOGS에서 고유키(PK) id에 해당하는 레코드(행)를 삭제.
+     * @param id 삭제하려는 레코드의 고유키.
+     * @return 테이블에서 삭제된 행의 개수.
+     */
+    public int delete(int id) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            stmt = conn.prepareStatement(SQL_DELETE);
+            stmt.setInt(1, id);
+            result = stmt.executeUpdate();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
 
 }
