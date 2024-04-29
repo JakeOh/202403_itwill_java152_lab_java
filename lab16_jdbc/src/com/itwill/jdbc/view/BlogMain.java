@@ -3,6 +3,7 @@ package com.itwill.jdbc.view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JComboBox;
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.itwill.jdbc.controller.BlogDao;
 import com.itwill.jdbc.model.Blog;
+import com.itwill.jdbc.view.BlogCreateFrame.CreateNotify;
 
 import java.awt.Font;
 import java.util.List;
@@ -22,7 +24,8 @@ import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class BlogMain {
+public class BlogMain implements CreateNotify {
+    
     private static final String[] SEARCH_TYPES  = { 
             "제목", "내용", "제목+내용", "작성자" 
     };
@@ -110,7 +113,7 @@ public class BlogMain {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 새 블로그 작성 창 띄우기
-                BlogCreateFrame.showBlogCreateFrame(frame);
+                BlogCreateFrame.showBlogCreateFrame(frame, BlogMain.this);
             }
         });
         btnCreate.setFont(new Font("D2Coding", Font.PLAIN, 28));
@@ -148,6 +151,13 @@ public class BlogMain {
             tableModel.addRow(row); // 테이블 모델에 행 데이터를 추가.
         }
         table.setModel(tableModel); // JTable의 모델을 다시 세팅.
+    }
+
+    @Override
+    public void notifyCreateSuccess() {
+        // 테이블에 insert 성공했을 때 BlogCreateFrame이 호출하는 메서드.
+        initializeTable();
+        JOptionPane.showMessageDialog(frame, "새 블로그 등록 성공!");
     }
     
 }

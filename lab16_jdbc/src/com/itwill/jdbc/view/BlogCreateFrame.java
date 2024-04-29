@@ -7,6 +7,7 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -17,10 +18,16 @@ import com.itwill.jdbc.controller.BlogDao;
 import com.itwill.jdbc.model.Blog;
 
 public class BlogCreateFrame extends JFrame {
+    
+    public interface CreateNotify {
+        void notifyCreateSuccess();
+    }
 
     private static final long serialVersionUID = 1L;
     
     private BlogDao dao = BlogDao.getInstance();
+    private CreateNotify app;
+    
     private JPanel contentPane;
     
     private Component parent;
@@ -38,11 +45,11 @@ public class BlogCreateFrame extends JFrame {
     /**
      * Launch the application.
      */
-    public static void showBlogCreateFrame(Component parent) {
+    public static void showBlogCreateFrame(Component parent, CreateNotify app) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    BlogCreateFrame frame = new BlogCreateFrame(parent);
+                    BlogCreateFrame frame = new BlogCreateFrame(parent, app);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,8 +61,9 @@ public class BlogCreateFrame extends JFrame {
     /**
      * Create the frame.
      */
-    private BlogCreateFrame(Component parent) {
+    private BlogCreateFrame(Component parent, CreateNotify app) {
         this.parent = parent;
+        this.app = app;
         
         initialize();
     }
@@ -136,9 +144,24 @@ public class BlogCreateFrame extends JFrame {
         String title = textTitle.getText();
         String content = textContent.getText();
         String writer = textWriter.getText();
+        if (title.equals("") || content.equals("") || writer.equals("")) {
+            JOptionPane.showMessageDialog(
+                    BlogCreateFrame.this, 
+                    "제목, 내용, 작성자는 반드시 입력해야 합니다!", 
+                    "경고", 
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         Blog blog = new Blog(0, title, content, writer, null, null);
-//        int result = dao.create(blog);
+        int result = dao.create(blog);
+        if (result == 1) {
+            // BlogMain 프레임에게 테이블 삽입 성공을 알려줌.
+            app.notifyCreateSuccess();
+            dispose(); // 현재 창 닫기.
+        } else {
+            JOptionPane.showMessageDialog(BlogCreateFrame.this, "INSERT 실패");
+        }
     }
     
 }

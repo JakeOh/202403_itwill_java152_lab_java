@@ -114,5 +114,38 @@ public class BlogDao {
         
         return result;
     }
+    
+    // create(Blog blog) 메서드에서 사용할 SQL:
+    // insert into blogs (title, content, writer) values (?, ?, ?)
+    private static final String SQL_INSERT = String.format(
+            "insert into %s (%s, %s, %s) values (?, ?, ?)", 
+            TBL_BLOGS, COL_TITLE, COL_CONTENT, COL_WRITER);
+    
+    /**
+     * 데이터베이스의 BLOGS 테이블에 행을 삽입.
+     * @param blog 테이블에 삽입할 제목, 내용, 작성자 정보를 가지고 있는 객체.
+     * @return 테이블에 삽입된 행의 개수.
+     */
+    public int create(Blog blog) {
+        int result = 0;
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = DriverManager.getConnection(URL, USER, PASSWORD); // DB 접속.
+            stmt = conn.prepareStatement(SQL_INSERT); // Statement 객체 생성.
+            stmt.setString(1, blog.getTitle()); // Statement의 첫번째 ? 채움.
+            stmt.setString(2, blog.getContent()); // Statement의 두번째 ? 채움.
+            stmt.setString(3, blog.getWriter()); // Statement의 세번째 ? 채움.
+            result = stmt.executeUpdate(); // SQL 실행.
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, stmt);
+        }
+        
+        return result;
+    }
 
 }
